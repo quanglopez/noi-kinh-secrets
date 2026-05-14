@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { Bookmark, Share2, Printer, Lock, ArrowRight, ArrowLeft, Link2 } from "lucide-react";
+import { Bookmark, Share2, Printer, Lock, ArrowRight, ArrowLeft, Link2, ChevronRight, Home } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -39,6 +39,39 @@ export const Route = createFileRoute("/bai-viet/$slug")({
       ],
       links: [{ rel: "canonical", href: url }],
       scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Trang chủ",
+                item: "https://hoang-de-noi-kinh.lovable.app/",
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Thư viện",
+                item: "https://hoang-de-noi-kinh.lovable.app/thu-vien",
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: loaderData.article.category,
+                item: `https://hoang-de-noi-kinh.lovable.app/thu-vien?cat=${encodeURIComponent(loaderData.article.category)}`,
+              },
+              {
+                "@type": "ListItem",
+                position: 4,
+                name: loaderData.article.title,
+                item: url,
+              },
+            ],
+          }),
+        },
         {
           type: "application/ld+json",
           children: JSON.stringify({
@@ -121,6 +154,28 @@ function ArticlePage() {
         </div>
         <div className="mx-auto max-w-7xl px-6 -mt-24 md:-mt-32 relative">
           <div className="bg-background border border-border rounded-sm p-8 md:p-12 max-w-4xl">
+            <nav aria-label="Breadcrumb" className="mb-6">
+              <ol className="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground">
+                <li>
+                  <Link to="/" className="flex items-center gap-1 hover:text-imperial transition-colors">
+                    <Home className="h-3 w-3" />
+                    <span className="sr-only sm:not-sr-only">Trang chủ</span>
+                  </Link>
+                </li>
+                <ChevronRight className="h-3 w-3 opacity-50" aria-hidden />
+                <li>
+                  <Link to="/thu-vien" className="hover:text-imperial transition-colors">Thư viện</Link>
+                </li>
+                <ChevronRight className="h-3 w-3 opacity-50" aria-hidden />
+                <li>
+                  <span className="text-gold uppercase tracking-wider">{article.category}</span>
+                </li>
+                <ChevronRight className="h-3 w-3 opacity-50" aria-hidden />
+                <li className="text-foreground/80 truncate max-w-[200px] sm:max-w-xs" aria-current="page">
+                  {article.title}
+                </li>
+              </ol>
+            </nav>
             <div className="flex flex-wrap items-center gap-3 mb-6">
               <Badge className="bg-gold text-ink rounded-sm">{article.category}</Badge>
               <span className="text-sm text-muted-foreground">{article.readingTime}</span>
