@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SiteLayout } from "@/components/site/layout";
 import { articles, getRelatedArticles, distributeContextualLinks, getAdjacentArticles, type Article } from "@/lib/seed-data";
+import { useRecoImpression, trackRecoClick } from "@/lib/reco-analytics";
 
 export const Route = createFileRoute("/bai-viet/$slug")({
   loader: ({ params }) => {
@@ -379,18 +380,7 @@ function ArticlePage() {
             <p className="text-sm text-muted-foreground mb-8">Gợi ý dựa trên chuyên mục và từ khoá tương đồng.</p>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
               {related.map((a) => (
-                <Link key={a.slug} to="/bai-viet/$slug" params={{ slug: a.slug }} className="group">
-                  <article className="ink-card rounded-sm overflow-hidden">
-                    <div className="aspect-[16/10] overflow-hidden">
-                      <img src={a.thumbnail} alt={a.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                    </div>
-                    <div className="p-5">
-                      <span className="text-xs uppercase tracking-wider text-gold">{a.category}</span>
-                      <h3 className="font-serif text-lg mt-2 group-hover:text-imperial transition-colors">{a.title}</h3>
-                      <p className="text-xs text-muted-foreground mt-2 line-clamp-2">{a.excerpt}</p>
-                    </div>
-                  </article>
-                </Link>
+                <RelatedCard key={a.slug} item={a} fromSlug={article.slug} />
               ))}
             </div>
           </div>
