@@ -10,12 +10,30 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ThuVienRouteImport } from './routes/thu-vien'
+import { Route as KhoaHocRouteImport } from './routes/khoa-hoc'
+import { Route as HoiVienRouteImport } from './routes/hoi-vien'
+import { Route as CuaHangRouteImport } from './routes/cua-hang'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BaiVietSlugRouteImport } from './routes/bai-viet.$slug'
 
 const ThuVienRoute = ThuVienRouteImport.update({
   id: '/thu-vien',
   path: '/thu-vien',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KhoaHocRoute = KhoaHocRouteImport.update({
+  id: '/khoa-hoc',
+  path: '/khoa-hoc',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HoiVienRoute = HoiVienRouteImport.update({
+  id: '/hoi-vien',
+  path: '/hoi-vien',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CuaHangRoute = CuaHangRouteImport.update({
+  id: '/cua-hang',
+  path: '/cua-hang',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -31,30 +49,61 @@ const BaiVietSlugRoute = BaiVietSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cua-hang': typeof CuaHangRoute
+  '/hoi-vien': typeof HoiVienRoute
+  '/khoa-hoc': typeof KhoaHocRoute
   '/thu-vien': typeof ThuVienRoute
   '/bai-viet/$slug': typeof BaiVietSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cua-hang': typeof CuaHangRoute
+  '/hoi-vien': typeof HoiVienRoute
+  '/khoa-hoc': typeof KhoaHocRoute
   '/thu-vien': typeof ThuVienRoute
   '/bai-viet/$slug': typeof BaiVietSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cua-hang': typeof CuaHangRoute
+  '/hoi-vien': typeof HoiVienRoute
+  '/khoa-hoc': typeof KhoaHocRoute
   '/thu-vien': typeof ThuVienRoute
   '/bai-viet/$slug': typeof BaiVietSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/thu-vien' | '/bai-viet/$slug'
+  fullPaths:
+    | '/'
+    | '/cua-hang'
+    | '/hoi-vien'
+    | '/khoa-hoc'
+    | '/thu-vien'
+    | '/bai-viet/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/thu-vien' | '/bai-viet/$slug'
-  id: '__root__' | '/' | '/thu-vien' | '/bai-viet/$slug'
+  to:
+    | '/'
+    | '/cua-hang'
+    | '/hoi-vien'
+    | '/khoa-hoc'
+    | '/thu-vien'
+    | '/bai-viet/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/cua-hang'
+    | '/hoi-vien'
+    | '/khoa-hoc'
+    | '/thu-vien'
+    | '/bai-viet/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CuaHangRoute: typeof CuaHangRoute
+  HoiVienRoute: typeof HoiVienRoute
+  KhoaHocRoute: typeof KhoaHocRoute
   ThuVienRoute: typeof ThuVienRoute
   BaiVietSlugRoute: typeof BaiVietSlugRoute
 }
@@ -66,6 +115,27 @@ declare module '@tanstack/react-router' {
       path: '/thu-vien'
       fullPath: '/thu-vien'
       preLoaderRoute: typeof ThuVienRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/khoa-hoc': {
+      id: '/khoa-hoc'
+      path: '/khoa-hoc'
+      fullPath: '/khoa-hoc'
+      preLoaderRoute: typeof KhoaHocRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hoi-vien': {
+      id: '/hoi-vien'
+      path: '/hoi-vien'
+      fullPath: '/hoi-vien'
+      preLoaderRoute: typeof HoiVienRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cua-hang': {
+      id: '/cua-hang'
+      path: '/cua-hang'
+      fullPath: '/cua-hang'
+      preLoaderRoute: typeof CuaHangRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -87,6 +157,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CuaHangRoute: CuaHangRoute,
+  HoiVienRoute: HoiVienRoute,
+  KhoaHocRoute: KhoaHocRoute,
   ThuVienRoute: ThuVienRoute,
   BaiVietSlugRoute: BaiVietSlugRoute,
 }
