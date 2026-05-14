@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Search, Lock, Sparkles } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -9,6 +9,11 @@ import { articles, categories, getSuggestedArticles } from "@/lib/seed-data";
 import { useRecoImpression, trackRecoClick } from "@/lib/reco-analytics";
 
 export const Route = createFileRoute("/thu-vien")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    cat: typeof search.cat === "string" ? search.cat : undefined,
+    q: typeof search.q === "string" ? search.q : undefined,
+    sort: search.sort === "popular" ? "popular" : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Thư viện bài viết — Hoàng Đế Nội Kinh" },
@@ -22,9 +27,24 @@ export const Route = createFileRoute("/thu-vien")({
 });
 
 function LibraryPage() {
-  const [q, setQ] = useState("");
-  const [cat, setCat] = useState<string | null>(null);
-  const [sort, setSort] = useState<"new" | "popular">("new");
+  const search = Route.useSearch();
+  const [q, setQ] = useState(search.q ?? "");
+  const [cat, setCat] = useState<string | null>(search.cat ?? null);
+  const [sort, setSort] = useState<"new" | "popular">(search.sort ?? "new");
+
+  // Persist current filter state so the article page's "Quay lại thư viện"
+  // button can return the user to the exact same view.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      sessionStorage.setItem(
+        "library:lastView",
+        JSON.stringify({ q, cat, sort }),
+      );
+    } catch {
+      /* ignore quota */
+    }
+  }, [q, cat, sort]);
 
   const filtered = articles
     .filter((a) => (cat ? a.category === cat : true))
