@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
-import { Bookmark, Share2, Printer, Lock, ArrowRight, ArrowLeft, Link2, ChevronRight, Home, BookOpen, X, ArrowUpLeft } from "lucide-react";
+import { Bookmark, Share2, Printer, Lock, ArrowRight, ArrowLeft, Link2, ChevronRight, Home, BookOpen, X, ArrowUpLeft, ListOrdered, ArrowUp } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -127,6 +127,7 @@ function ArticlePage() {
   const [swipeHint, setSwipeHint] = useState<null | "edge-prev" | "edge-next">(null);
   const [readProgress, setReadProgress] = useState(0);
   const [resumeOffset, setResumeOffset] = useState<number | null>(null);
+  const [tocOpen, setTocOpen] = useState(false);
   const [backToLibrary, setBackToLibrary] = useState<{
     q?: string;
     cat?: string;
@@ -251,6 +252,7 @@ function ArticlePage() {
     window.scrollTo({ top, behavior: "smooth" });
     history.replaceState(null, "", `#${id}`);
     setActiveId(id);
+    setTocOpen(false);
   };
 
   // Swipe navigation (mobile/tablet) — left = next, right = prev
