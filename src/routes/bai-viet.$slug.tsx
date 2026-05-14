@@ -84,7 +84,7 @@ function ArticlePage() {
           )}
           <div className={article.isPremium ? "relative" : ""}>
             <div className={article.isPremium ? "paywall-fade" : ""}>
-              {article.content.map((s, i) => (
+              {article.content.map((s: { heading: string; body: string }, i: number) => (
                 <section key={i} id={`section-${i}`} className="mb-10">
                   <h2 className="font-serif text-3xl mb-4">{s.heading}</h2>
                   <p className="font-serif text-lg leading-[1.85] text-foreground/90">{s.body}</p>
@@ -107,7 +107,7 @@ function ArticlePage() {
           <div className="sticky top-24">
             <p className="text-xs uppercase tracking-[0.3em] text-imperial mb-4">Mục lục</p>
             <ul className="space-y-3 border-l border-border pl-4">
-              {article.content.map((s, i) => (
+              {article.content.map((s: { heading: string; body: string }, i: number) => (
                 <li key={i}>
                   <a href={`#section-${i}`} className="text-sm text-muted-foreground hover:text-imperial transition-colors">{s.heading}</a>
                 </li>
