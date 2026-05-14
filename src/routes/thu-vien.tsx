@@ -1,11 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
-import { Search, Lock } from "lucide-react";
+import { useMemo, useState } from "react";
+import { Search, Lock, Sparkles } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SiteLayout } from "@/components/site/layout";
-import { articles, categories } from "@/lib/seed-data";
+import { articles, categories, getSuggestedArticles } from "@/lib/seed-data";
 
 export const Route = createFileRoute("/thu-vien")({
   head: () => ({
@@ -33,6 +33,20 @@ function LibraryPage() {
         ? +new Date(b.publishedAt) - +new Date(a.publishedAt)
         : a.title.localeCompare(b.title),
     );
+
+  const hasActiveFilter = q.trim().length > 0 || cat !== null;
+  const suggested = useMemo(
+    () =>
+      hasActiveFilter
+        ? getSuggestedArticles({
+            query: q,
+            category: cat,
+            excludeSlugs: filtered.map((a) => a.slug),
+            limit: 4,
+          })
+        : [],
+    [q, cat, filtered, hasActiveFilter],
+  );
 
   return (
     <SiteLayout>
@@ -62,7 +76,22 @@ function LibraryPage() {
             ))}
           </div>
           {filtered.length === 0 ? (
-            <p className="text-center py-16 text-muted-foreground">Không tìm thấy bài viết phù hợp.</p>
+            <div className="text-center py-16">
+              <p className="text-muted-foreground">Không tìm thấy bài viết phù hợp với từ khoá.</p>
+              {(q || cat) && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="mt-4 rounded-sm"
+                  onClick={() => {
+                    setQ("");
+                    setCat(null);
+                  }}
+                >
+                  Xoá bộ lọc
+                </Button>
+              )}
+            </div>
           ) : (
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {filtered.map((a) => (
@@ -86,6 +115,38 @@ function LibraryPage() {
                   </article>
                 </Link>
               ))}
+            </div>
+          )}
+
+          {suggested.length > 0 && (
+            <div className="mt-20 pt-12 border-t border-border">
+              <div className="flex items-baseline justify-between mb-2">
+                <h2 className="font-serif text-3xl flex items-center gap-3">
+                  <Sparkles className="h-5 w-5 text-gold" />
+                  Bạn có thể quan tâm
+                </h2>
+              </div>
+              <p className="text-sm text-muted-foreground mb-8">
+                {q.trim()
+                  ? <>Gợi ý dựa trên từ khoá <em className="text-foreground">"{q.trim()}"</em>{cat ? <> và chuyên mục <em className="text-foreground">{cat}</em></> : null}.</>
+                  : <>Gợi ý dựa trên chuyên mục <em className="text-foreground">{cat}</em>.</>}
+              </p>
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                {suggested.map((a) => (
+                  <Link key={a.slug} to="/bai-viet/$slug" params={{ slug: a.slug }} className="group">
+                    <article className="ink-card rounded-sm overflow-hidden h-full flex flex-col">
+                      <div className="aspect-[16/10] overflow-hidden">
+                        <img src={a.thumbnail} alt={a.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                      </div>
+                      <div className="p-5 flex-1 flex flex-col">
+                        <span className="text-[10px] uppercase tracking-wider text-gold mb-2">{a.category}</span>
+                        <h3 className="font-serif text-base leading-snug group-hover:text-imperial transition-colors">{a.title}</h3>
+                        <p className="text-xs text-muted-foreground mt-2 line-clamp-2">{a.excerpt}</p>
+                      </div>
+                    </article>
+                  </Link>
+                ))}
+              </div>
             </div>
           )}
         </div>
