@@ -83,8 +83,10 @@ function ArticlePage() {
   const [activeId, setActiveId] = useState<string>("section-0");
 
   useEffect(() => {
-    const ids = article.content.map((_, i) => `section-${i}`);
-    const els = ids.map((id) => document.getElementById(id)).filter((el): el is HTMLElement => !!el);
+    const ids: string[] = article.content.map((_s: { heading: string; body: string }, i: number) => `section-${i}`);
+    const els = ids
+      .map((id: string) => document.getElementById(id))
+      .filter((el: HTMLElement | null): el is HTMLElement => !!el);
     if (!els.length) return;
     const observer = new IntersectionObserver(
       (entries) => {
@@ -95,7 +97,7 @@ function ArticlePage() {
       },
       { rootMargin: "-80px 0px -65% 0px", threshold: [0, 1] }
     );
-    els.forEach((el) => observer.observe(el));
+    els.forEach((el: HTMLElement) => observer.observe(el));
     return () => observer.disconnect();
   }, [article.slug, article.content]);
 
