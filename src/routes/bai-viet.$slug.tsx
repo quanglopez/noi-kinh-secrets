@@ -1,10 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { Bookmark, Share2, Printer, Lock, ArrowRight, Link2 } from "lucide-react";
+import { Bookmark, Share2, Printer, Lock, ArrowRight, ArrowLeft, Link2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SiteLayout } from "@/components/site/layout";
-import { articles, getRelatedArticles, getContextualLinks } from "@/lib/seed-data";
+import { articles, getRelatedArticles, getContextualLinks, getAdjacentArticles } from "@/lib/seed-data";
 
 export const Route = createFileRoute("/bai-viet/$slug")({
   loader: ({ params }) => {
@@ -81,6 +81,7 @@ function ArticlePage() {
   const { article } = Route.useLoaderData();
   void articles;
   const related = getRelatedArticles(article, 4);
+  const { prev, next } = getAdjacentArticles(article);
   const [activeId, setActiveId] = useState<string>("section-0");
 
   useEffect(() => {
@@ -223,6 +224,50 @@ function ArticlePage() {
             </div>
           </div>
         </section>
+      )}
+
+      {(prev || next) && (
+        <nav
+          aria-label="Điều hướng bài viết"
+          className="border-t border-border"
+        >
+          <div className="mx-auto max-w-7xl px-6 py-12 grid gap-4 md:grid-cols-2">
+            {prev ? (
+              <Link
+                to="/bai-viet/$slug"
+                params={{ slug: prev.slug }}
+                rel="prev"
+                className="ink-card rounded-sm p-6 group flex items-start gap-4"
+              >
+                <ArrowLeft className="h-5 w-5 mt-1 text-imperial shrink-0 group-hover:-translate-x-1 transition-transform" />
+                <div>
+                  <p className="text-[11px] uppercase tracking-[0.3em] text-gold mb-2">Bài trước</p>
+                  <p className="font-serif text-lg leading-snug group-hover:text-imperial transition-colors">{prev.title}</p>
+                  <p className="text-xs text-muted-foreground mt-1">{prev.category} · {prev.readingTime}</p>
+                </div>
+              </Link>
+            ) : (
+              <div className="hidden md:block" />
+            )}
+            {next ? (
+              <Link
+                to="/bai-viet/$slug"
+                params={{ slug: next.slug }}
+                rel="next"
+                className="ink-card rounded-sm p-6 group flex items-start gap-4 md:text-right md:flex-row-reverse"
+              >
+                <ArrowRight className="h-5 w-5 mt-1 text-imperial shrink-0 group-hover:translate-x-1 transition-transform" />
+                <div>
+                  <p className="text-[11px] uppercase tracking-[0.3em] text-gold mb-2">Bài tiếp theo</p>
+                  <p className="font-serif text-lg leading-snug group-hover:text-imperial transition-colors">{next.title}</p>
+                  <p className="text-xs text-muted-foreground mt-1">{next.category} · {next.readingTime}</p>
+                </div>
+              </Link>
+            ) : (
+              <div className="hidden md:block" />
+            )}
+          </div>
+        </nav>
       )}
     </SiteLayout>
   );

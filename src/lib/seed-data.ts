@@ -284,3 +284,23 @@ export function getContextualLinks(
     .sort((a, b) => b.score - a.score);
   return scored.slice(0, limit).map((x) => x.article);
 }
+
+/**
+ * Reading order = newest first (by publishedAt desc). Returns the previous
+ * (newer) and next (older) article relative to the current one, or null at
+ * the boundaries.
+ */
+export function getAdjacentArticles(current: Article): {
+  prev: Article | null;
+  next: Article | null;
+} {
+  const ordered = [...articles].sort(
+    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+  );
+  const idx = ordered.findIndex((a) => a.slug === current.slug);
+  if (idx === -1) return { prev: null, next: null };
+  return {
+    prev: idx > 0 ? ordered[idx - 1] : null,
+    next: idx < ordered.length - 1 ? ordered[idx + 1] : null,
+  };
+}
