@@ -9,38 +9,65 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ThuVienRouteImport } from './routes/thu-vien'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BaiVietSlugRouteImport } from './routes/bai-viet.$slug'
 
+const ThuVienRoute = ThuVienRouteImport.update({
+  id: '/thu-vien',
+  path: '/thu-vien',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BaiVietSlugRoute = BaiVietSlugRouteImport.update({
+  id: '/bai-viet/$slug',
+  path: '/bai-viet/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/thu-vien': typeof ThuVienRoute
+  '/bai-viet/$slug': typeof BaiVietSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/thu-vien': typeof ThuVienRoute
+  '/bai-viet/$slug': typeof BaiVietSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/thu-vien': typeof ThuVienRoute
+  '/bai-viet/$slug': typeof BaiVietSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/thu-vien' | '/bai-viet/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/thu-vien' | '/bai-viet/$slug'
+  id: '__root__' | '/' | '/thu-vien' | '/bai-viet/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ThuVienRoute: typeof ThuVienRoute
+  BaiVietSlugRoute: typeof BaiVietSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/thu-vien': {
+      id: '/thu-vien'
+      path: '/thu-vien'
+      fullPath: '/thu-vien'
+      preLoaderRoute: typeof ThuVienRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,12 +75,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bai-viet/$slug': {
+      id: '/bai-viet/$slug'
+      path: '/bai-viet/$slug'
+      fullPath: '/bai-viet/$slug'
+      preLoaderRoute: typeof BaiVietSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ThuVienRoute: ThuVienRoute,
+  BaiVietSlugRoute: BaiVietSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
