@@ -15,6 +15,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as LuuYSucKhoeRouteImport } from './routes/luu-y-suc-khoe'
 import { Route as KhoaHocRouteImport } from './routes/khoa-hoc'
 import { Route as HoiVienRouteImport } from './routes/hoi-vien'
+import { Route as GoiYThongKeRouteImport } from './routes/goi-y-thong-ke'
 import { Route as GioiThieuRouteImport } from './routes/gioi-thieu'
 import { Route as CuaHangRouteImport } from './routes/cua-hang'
 import { Route as IndexRouteImport } from './routes/index'
@@ -50,6 +51,11 @@ const HoiVienRoute = HoiVienRouteImport.update({
   path: '/hoi-vien',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GoiYThongKeRoute = GoiYThongKeRouteImport.update({
+  id: '/goi-y-thong-ke',
+  path: '/goi-y-thong-ke',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GioiThieuRoute = GioiThieuRouteImport.update({
   id: '/gioi-thieu',
   path: '/gioi-thieu',
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/cua-hang': typeof CuaHangRoute
   '/gioi-thieu': typeof GioiThieuRoute
+  '/goi-y-thong-ke': typeof GoiYThongKeRoute
   '/hoi-vien': typeof HoiVienRoute
   '/khoa-hoc': typeof KhoaHocRoute
   '/luu-y-suc-khoe': typeof LuuYSucKhoeRoute
@@ -87,6 +94,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cua-hang': typeof CuaHangRoute
   '/gioi-thieu': typeof GioiThieuRoute
+  '/goi-y-thong-ke': typeof GoiYThongKeRoute
   '/hoi-vien': typeof HoiVienRoute
   '/khoa-hoc': typeof KhoaHocRoute
   '/luu-y-suc-khoe': typeof LuuYSucKhoeRoute
@@ -100,6 +108,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/cua-hang': typeof CuaHangRoute
   '/gioi-thieu': typeof GioiThieuRoute
+  '/goi-y-thong-ke': typeof GoiYThongKeRoute
   '/hoi-vien': typeof HoiVienRoute
   '/khoa-hoc': typeof KhoaHocRoute
   '/luu-y-suc-khoe': typeof LuuYSucKhoeRoute
@@ -114,6 +123,7 @@ export interface FileRouteTypes {
     | '/'
     | '/cua-hang'
     | '/gioi-thieu'
+    | '/goi-y-thong-ke'
     | '/hoi-vien'
     | '/khoa-hoc'
     | '/luu-y-suc-khoe'
@@ -126,6 +136,7 @@ export interface FileRouteTypes {
     | '/'
     | '/cua-hang'
     | '/gioi-thieu'
+    | '/goi-y-thong-ke'
     | '/hoi-vien'
     | '/khoa-hoc'
     | '/luu-y-suc-khoe'
@@ -138,6 +149,7 @@ export interface FileRouteTypes {
     | '/'
     | '/cua-hang'
     | '/gioi-thieu'
+    | '/goi-y-thong-ke'
     | '/hoi-vien'
     | '/khoa-hoc'
     | '/luu-y-suc-khoe'
@@ -151,6 +163,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CuaHangRoute: typeof CuaHangRoute
   GioiThieuRoute: typeof GioiThieuRoute
+  GoiYThongKeRoute: typeof GoiYThongKeRoute
   HoiVienRoute: typeof HoiVienRoute
   KhoaHocRoute: typeof KhoaHocRoute
   LuuYSucKhoeRoute: typeof LuuYSucKhoeRoute
@@ -204,6 +217,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HoiVienRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/goi-y-thong-ke': {
+      id: '/goi-y-thong-ke'
+      path: '/goi-y-thong-ke'
+      fullPath: '/goi-y-thong-ke'
+      preLoaderRoute: typeof GoiYThongKeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/gioi-thieu': {
       id: '/gioi-thieu'
       path: '/gioi-thieu'
@@ -239,6 +259,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CuaHangRoute: CuaHangRoute,
   GioiThieuRoute: GioiThieuRoute,
+  GoiYThongKeRoute: GoiYThongKeRoute,
   HoiVienRoute: HoiVienRoute,
   KhoaHocRoute: KhoaHocRoute,
   LuuYSucKhoeRoute: LuuYSucKhoeRoute,
@@ -250,3 +271,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
