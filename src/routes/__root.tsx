@@ -72,14 +72,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Hoàng Đế Nội Kinh — Bí Kíp Dưỡng Sinh" },
+      { name: "description", content: "Trí tuệ ngàn năm về sức khoẻ, sinh lực và hạnh phúc lứa đôi từ kinh điển Đông y." },
+      { name: "author", content: "Hoàng Đế Nội Kinh" },
+      { property: "og:title", content: "Hoàng Đế Nội Kinh — Bí Kíp Dưỡng Sinh" },
+      { property: "og:description", content: "Trí tuệ ngàn năm về sức khoẻ và hạnh phúc lứa đôi." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:site", content: "@HoangDeNoiKinh" },
     ],
     links: [
       {
@@ -96,7 +96,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="vi">
       <head>
         <HeadContent />
       </head>
