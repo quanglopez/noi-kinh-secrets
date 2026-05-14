@@ -286,6 +286,53 @@ export function getContextualLinks(
 }
 
 /**
+ * Compute "Đọc thêm" suggestions for ALL sections of an article at once,
+ * guaranteeing each suggested article appears at most once across the page
+ * and that no section gets more than `perSection` suggestions.
+ *
+ * Pass `excludeSlugs` (e.g. articles already shown in the "Related" grid)
+ * to keep on-page links unique end-to-end.
+ */
+export function distributeContextualLinks(
+  current: Article,
+  sections: { heading: string; body: string }[],
+  opts: { perSection?: number; excludeSlugs?: string[] } = {},
+): Article[][] {
+  const { perSection = 2, excludeSlugs = [] } = opts;
+  const exclude = new Set([current.slug, ...excludeSlugs]);
+  const result: Article[][] = sections.map(() => []);
+
+  // Score every (section, candidate) pair once.
+  type Pair = { sectionIdx: number; article: Article; score: number };
+  const pairs: Pair[] = [];
+  const sectionTokens = sections.map((s) => new Set(tokenize(`${s.heading} ${s.body}`)));
+
+  articles
+    .filter((a) => !exclude.has(a.slug))
+    .forEach((a) => {
+      const kw = articleKeywords(a);
+      sectionTokens.forEach((tokens, sectionIdx) => {
+        let overlap = 0;
+        kw.forEach((w) => {
+          if (tokens.has(w)) overlap += 1;
+        });
+        if (overlap >= 2) pairs.push({ sectionIdx, article: a, score: overlap });
+      });
+    });
+
+  // Greedy: take highest-scoring pair, assign, mark article+section seats used.
+  pairs.sort((a, b) => b.score - a.score);
+  const usedSlugs = new Set<string>();
+  for (const pair of pairs) {
+    if (usedSlugs.has(pair.article.slug)) continue;
+    if (result[pair.sectionIdx].length >= perSection) continue;
+    result[pair.sectionIdx].push(pair.article);
+    usedSlugs.add(pair.article.slug);
+  }
+  return result;
+}
+
+/**
  * Reading order = newest first (by publishedAt desc). Returns the previous
  * (newer) and next (older) article relative to the current one, or null at
  * the boundaries.

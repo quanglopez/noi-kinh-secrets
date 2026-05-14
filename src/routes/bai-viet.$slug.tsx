@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SiteLayout } from "@/components/site/layout";
-import { articles, getRelatedArticles, getContextualLinks, getAdjacentArticles } from "@/lib/seed-data";
+import { articles, getRelatedArticles, distributeContextualLinks, getAdjacentArticles, type Article } from "@/lib/seed-data";
 
 export const Route = createFileRoute("/bai-viet/$slug")({
   loader: ({ params }) => {
@@ -115,6 +115,10 @@ function ArticlePage() {
   void articles;
   const related = getRelatedArticles(article, 4);
   const { prev, next } = getAdjacentArticles(article);
+  const contextualLinksBySection = distributeContextualLinks(article, article.content, {
+    perSection: 2,
+    excludeSlugs: related.map((a) => a.slug),
+  });
   const [activeId, setActiveId] = useState<string>("section-0");
 
   useEffect(() => {
@@ -211,7 +215,7 @@ function ArticlePage() {
                 <section key={i} id={`section-${i}`} className="mb-10 scroll-mt-24">
                   <h2 className="font-serif text-3xl mb-4">{s.heading}</h2>
                   <p className="font-serif text-lg leading-[1.85] text-foreground/90">{s.body}</p>
-                  <ContextualLinks current={article} sectionText={`${s.heading} ${s.body}`} />
+                  <ContextualLinks links={contextualLinksBySection[i]} />
                 </section>
               ))}
             </div>
@@ -328,15 +332,8 @@ function ArticlePage() {
   );
 }
 
-function ContextualLinks({
-  current,
-  sectionText,
-}: {
-  current: ReturnType<typeof getRelatedArticles>[number];
-  sectionText: string;
-}) {
-  const links = getContextualLinks(current, sectionText, 2);
-  if (links.length === 0) return null;
+function ContextualLinks({ links }: { links: Article[] }) {
+  if (!links || links.length === 0) return null;
   return (
     <aside className="mt-6 border-l-2 border-gold/60 bg-card/40 px-4 py-3 rounded-sm not-prose">
       <p className="text-[11px] uppercase tracking-[0.25em] text-gold mb-2 flex items-center gap-2">
