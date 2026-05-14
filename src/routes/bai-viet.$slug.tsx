@@ -11,18 +11,53 @@ export const Route = createFileRoute("/bai-viet/$slug")({
     if (!article) throw notFound();
     return { article };
   },
-  head: ({ loaderData }) => ({
-    meta: loaderData
-      ? [
-          { title: `${loaderData.article.title} — Hoàng Đế Nội Kinh` },
-          { name: "description", content: loaderData.article.excerpt },
-          { property: "og:title", content: loaderData.article.title },
-          { property: "og:description", content: loaderData.article.excerpt },
-          { property: "og:image", content: loaderData.article.thumbnail },
-          { property: "og:type", content: "article" },
-        ]
-      : [],
-  }),
+  head: ({ loaderData, params }) => {
+    if (!loaderData) return { meta: [], links: [] };
+    const url = `https://hoang-de-noi-kinh.lovable.app/bai-viet/${params.slug}`;
+    const image = loaderData.article.thumbnail?.startsWith("http")
+      ? loaderData.article.thumbnail
+      : `https://hoang-de-noi-kinh.lovable.app${loaderData.article.thumbnail}`;
+    const title = `${loaderData.article.title} — Hoàng Đế Nội Kinh`;
+    const description = loaderData.article.excerpt;
+    return {
+      meta: [
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:image", content: image },
+        { property: "og:url", content: url },
+        { property: "og:type", content: "article" },
+        { property: "og:site_name", content: "Hoàng Đế Nội Kinh" },
+        { property: "article:published_time", content: loaderData.article.publishedAt },
+        { property: "article:section", content: loaderData.article.category },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: description },
+        { name: "twitter:image", content: image },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: loaderData.article.title,
+            description,
+            image,
+            datePublished: loaderData.article.publishedAt,
+            articleSection: loaderData.article.category,
+            mainEntityOfPage: url,
+            publisher: {
+              "@type": "Organization",
+              name: "Hoàng Đế Nội Kinh",
+            },
+          }),
+        },
+      ],
+    };
+  },
   notFoundComponent: () => (
     <SiteLayout>
       <div className="py-32 text-center">
