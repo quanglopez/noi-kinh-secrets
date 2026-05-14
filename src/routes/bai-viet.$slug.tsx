@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Bookmark, Share2, Printer, Lock, ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SiteLayout } from "@/components/site/layout";
@@ -79,6 +80,34 @@ export const Route = createFileRoute("/bai-viet/$slug")({
 function ArticlePage() {
   const { article } = Route.useLoaderData();
   const related = articles.filter((a) => a.slug !== article.slug && a.category === article.category).slice(0, 3);
+  const [activeId, setActiveId] = useState<string>("section-0");
+
+  useEffect(() => {
+    const ids = article.content.map((_, i) => `section-${i}`);
+    const els = ids.map((id) => document.getElementById(id)).filter((el): el is HTMLElement => !!el);
+    if (!els.length) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible[0]) setActiveId(visible[0].target.id);
+      },
+      { rootMargin: "-80px 0px -65% 0px", threshold: [0, 1] }
+    );
+    els.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [article.slug, article.content]);
+
+  const handleTocClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const el = document.getElementById(id);
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.scrollY - 80;
+    window.scrollTo({ top, behavior: "smooth" });
+    history.replaceState(null, "", `#${id}`);
+    setActiveId(id);
+  };
 
   return (
     <SiteLayout>
@@ -120,7 +149,7 @@ function ArticlePage() {
           <div className={article.isPremium ? "relative" : ""}>
             <div className={article.isPremium ? "paywall-fade" : ""}>
               {article.content.map((s: { heading: string; body: string }, i: number) => (
-                <section key={i} id={`section-${i}`} className="mb-10">
+                <section key={i} id={`section-${i}`} className="mb-10 scroll-mt-24">
                   <h2 className="font-serif text-3xl mb-4">{s.heading}</h2>
                   <p className="font-serif text-lg leading-[1.85] text-foreground/90">{s.body}</p>
                 </section>
@@ -142,11 +171,26 @@ function ArticlePage() {
           <div className="sticky top-24">
             <p className="text-xs uppercase tracking-[0.3em] text-imperial mb-4">Mục lục</p>
             <ul className="space-y-3 border-l border-border pl-4">
-              {article.content.map((s: { heading: string; body: string }, i: number) => (
-                <li key={i}>
-                  <a href={`#section-${i}`} className="text-sm text-muted-foreground hover:text-imperial transition-colors">{s.heading}</a>
-                </li>
-              ))}
+              {article.content.map((s: { heading: string; body: string }, i: number) => {
+                const id = `section-${i}`;
+                const isActive = activeId === id;
+                return (
+                  <li key={i} className="relative">
+                    {isActive && (
+                      <span className="absolute -left-[17px] top-0 bottom-0 w-0.5 bg-imperial" />
+                    )}
+                    <a
+                      href={`#${id}`}
+                      onClick={(e) => handleTocClick(e, id)}
+                      className={`block text-sm transition-colors ${
+                        isActive ? "text-imperial font-medium" : "text-muted-foreground hover:text-imperial"
+                      }`}
+                    >
+                      {s.heading}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </aside>
