@@ -1,10 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { Bookmark, Share2, Printer, Lock, ArrowRight } from "lucide-react";
+import { Bookmark, Share2, Printer, Lock, ArrowRight, Link2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SiteLayout } from "@/components/site/layout";
-import { articles } from "@/lib/seed-data";
+import { articles, getRelatedArticles, getContextualLinks } from "@/lib/seed-data";
 
 export const Route = createFileRoute("/bai-viet/$slug")({
   loader: ({ params }) => {
@@ -79,7 +79,8 @@ export const Route = createFileRoute("/bai-viet/$slug")({
 
 function ArticlePage() {
   const { article } = Route.useLoaderData();
-  const related = articles.filter((a) => a.slug !== article.slug && a.category === article.category).slice(0, 3);
+  void articles;
+  const related = getRelatedArticles(article, 4);
   const [activeId, setActiveId] = useState<string>("section-0");
 
   useEffect(() => {
@@ -154,6 +155,7 @@ function ArticlePage() {
                 <section key={i} id={`section-${i}`} className="mb-10 scroll-mt-24">
                   <h2 className="font-serif text-3xl mb-4">{s.heading}</h2>
                   <p className="font-serif text-lg leading-[1.85] text-foreground/90">{s.body}</p>
+                  <ContextualLinks current={article} sectionText={`${s.heading} ${s.body}`} />
                 </section>
               ))}
             </div>
@@ -201,8 +203,9 @@ function ArticlePage() {
       {related.length > 0 && (
         <section className="py-16 px-6 bg-card/40">
           <div className="mx-auto max-w-7xl">
-            <h2 className="font-serif text-3xl mb-8">Bài viết cùng chủ đề</h2>
-            <div className="grid gap-6 md:grid-cols-3">
+            <h2 className="font-serif text-3xl mb-2">Bài viết cùng chủ đề</h2>
+            <p className="text-sm text-muted-foreground mb-8">Gợi ý dựa trên chuyên mục và từ khoá tương đồng.</p>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
               {related.map((a) => (
                 <Link key={a.slug} to="/bai-viet/$slug" params={{ slug: a.slug }} className="group">
                   <article className="ink-card rounded-sm overflow-hidden">
@@ -212,6 +215,7 @@ function ArticlePage() {
                     <div className="p-5">
                       <span className="text-xs uppercase tracking-wider text-gold">{a.category}</span>
                       <h3 className="font-serif text-lg mt-2 group-hover:text-imperial transition-colors">{a.title}</h3>
+                      <p className="text-xs text-muted-foreground mt-2 line-clamp-2">{a.excerpt}</p>
                     </div>
                   </article>
                 </Link>
@@ -221,5 +225,38 @@ function ArticlePage() {
         </section>
       )}
     </SiteLayout>
+  );
+}
+
+function ContextualLinks({
+  current,
+  sectionText,
+}: {
+  current: ReturnType<typeof getRelatedArticles>[number];
+  sectionText: string;
+}) {
+  const links = getContextualLinks(current, sectionText, 2);
+  if (links.length === 0) return null;
+  return (
+    <aside className="mt-6 border-l-2 border-gold/60 bg-card/40 px-4 py-3 rounded-sm not-prose">
+      <p className="text-[11px] uppercase tracking-[0.25em] text-gold mb-2 flex items-center gap-2">
+        <Link2 className="h-3 w-3" /> Đọc thêm
+      </p>
+      <ul className="space-y-1.5">
+        {links.map((a) => (
+          <li key={a.slug}>
+            <Link
+              to="/bai-viet/$slug"
+              params={{ slug: a.slug }}
+              className="text-sm text-foreground/90 hover:text-imperial underline underline-offset-4 decoration-gold/40 hover:decoration-imperial transition-colors"
+              title={a.excerpt}
+            >
+              {a.title}
+            </Link>
+            <span className="text-xs text-muted-foreground"> · {a.category}</span>
+          </li>
+        ))}
+      </ul>
+    </aside>
   );
 }

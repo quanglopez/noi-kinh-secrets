@@ -215,3 +215,72 @@ export const courses: Course[] = [
 
 export const formatVND = (n: number) =>
   new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND", maximumFractionDigits: 0 }).format(n);
+
+// --- Internal linking helpers ---------------------------------------------
+
+const STOP_WORDS = new Set([
+  "và","của","trong","là","cho","với","theo","để","khi","các","những","một","mỗi",
+  "này","đó","hay","hoặc","như","đã","sẽ","được","từ","về","nên","cũng","có","không",
+  "thì","mà","vì","do","trên","dưới","sau","trước","đến","đi","ra","vào","cùng",
+  "the","and","of","in","to","a","for","with",
+]);
+
+function tokenize(text: string): string[] {
+  return text
+    .toLowerCase()
+    .normalize("NFC")
+    .replace(/[^\p{L}\p{N}\s]/gu, " ")
+    .split(/\s+/)
+    .filter((w) => w.length > 2 && !STOP_WORDS.has(w));
+}
+
+function articleKeywords(a: Article): Set<string> {
+  return new Set(tokenize(`${a.title} ${a.excerpt} ${a.category}`));
+}
+
+/**
+ * Score articles by shared category + keyword overlap, return top N excluding self.
+ */
+export function getRelatedArticles(current: Article, limit = 4): Article[] {
+  const currentKw = articleKeywords(current);
+  const scored = articles
+    .filter((a) => a.slug !== current.slug)
+    .map((a) => {
+      const kw = articleKeywords(a);
+      let overlap = 0;
+      kw.forEach((w) => {
+        if (currentKw.has(w)) overlap += 1;
+      });
+      const categoryBonus = a.category === current.category ? 4 : 0;
+      return { article: a, score: overlap + categoryBonus };
+    })
+    .filter((x) => x.score > 0)
+    .sort((a, b) => b.score - a.score);
+  return scored.slice(0, limit).map((x) => x.article);
+}
+
+/**
+ * Suggest 1–2 contextual internal links for a given content section based on
+ * keyword overlap between the section body and other articles.
+ */
+export function getContextualLinks(
+  current: Article,
+  sectionText: string,
+  limit = 2
+): Article[] {
+  const sectionKw = new Set(tokenize(sectionText));
+  if (sectionKw.size === 0) return [];
+  const scored = articles
+    .filter((a) => a.slug !== current.slug)
+    .map((a) => {
+      const kw = articleKeywords(a);
+      let overlap = 0;
+      kw.forEach((w) => {
+        if (sectionKw.has(w)) overlap += 1;
+      });
+      return { article: a, score: overlap };
+    })
+    .filter((x) => x.score >= 2)
+    .sort((a, b) => b.score - a.score);
+  return scored.slice(0, limit).map((x) => x.article);
+}
