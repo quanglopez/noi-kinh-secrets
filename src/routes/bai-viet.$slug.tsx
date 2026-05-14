@@ -528,7 +528,7 @@ function ArticlePage() {
       )}
       <ReadingProgressChip
         progress={readProgress}
-        sections={article.content.map((s, i) => ({ id: `section-${i}`, heading: s.heading }))}
+        sections={article.content.map((s: { heading: string; body: string }, i: number) => ({ id: `section-${i}`, heading: s.heading }))}
         activeId={activeId}
         open={tocOpen}
         onToggle={() => setTocOpen((v) => !v)}
