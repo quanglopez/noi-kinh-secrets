@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
-import { Bookmark, Share2, Printer, Lock, ArrowRight, ArrowLeft, Link2, ChevronRight, Home, BookOpen, X } from "lucide-react";
+import { Bookmark, Share2, Printer, Lock, ArrowRight, ArrowLeft, Link2, ChevronRight, Home, BookOpen, X, ArrowUpLeft } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -127,6 +127,45 @@ function ArticlePage() {
   const [swipeHint, setSwipeHint] = useState<null | "edge-prev" | "edge-next">(null);
   const [readProgress, setReadProgress] = useState(0);
   const [resumeOffset, setResumeOffset] = useState<number | null>(null);
+  const [backToLibrary, setBackToLibrary] = useState<{
+    q?: string;
+    cat?: string;
+    sort?: "popular";
+    label: string;
+  }>({ label: article.category, cat: article.category });
+
+  // Restore the user's last library filter state (set by /thu-vien) so the
+  // back button takes them to the exact same listing they came from.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      const raw = sessionStorage.getItem("library:lastView");
+      if (!raw) {
+        setBackToLibrary({ label: article.category, cat: article.category });
+        return;
+      }
+      const saved = JSON.parse(raw) as {
+        q?: string;
+        cat?: string | null;
+        sort?: "new" | "popular";
+      };
+      const q = saved.q?.trim() || undefined;
+      const cat = saved.cat || undefined;
+      const sort = saved.sort === "popular" ? "popular" : undefined;
+      const labelParts: string[] = [];
+      if (cat) labelParts.push(cat);
+      if (q) labelParts.push(`"${q}"`);
+      const label = labelParts.length ? labelParts.join(" · ") : "Tất cả bài viết";
+      setBackToLibrary({ q, cat, sort, label });
+    } catch {
+      setBackToLibrary({ label: article.category, cat: article.category });
+    }
+  }, [article.slug, article.category]);
+
+  const backSearch: { q?: string; cat?: string; sort?: "popular" } = {};
+  if (backToLibrary.q) backSearch.q = backToLibrary.q;
+  if (backToLibrary.cat) backSearch.cat = backToLibrary.cat;
+  if (backToLibrary.sort) backSearch.sort = backToLibrary.sort;
 
   // Track scroll progress within the article and persist last position per slug
   useEffect(() => {
