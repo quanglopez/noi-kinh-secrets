@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
-import { Bookmark, Share2, Printer, Lock, ArrowRight, ArrowLeft, Link2, ChevronRight, Home } from "lucide-react";
+import { Bookmark, Share2, Printer, Lock, ArrowRight, ArrowLeft, Link2, ChevronRight, Home, BookOpen, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -124,6 +124,65 @@ function ArticlePage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const touchStart = useRef<{ x: number; y: number; t: number } | null>(null);
   const [swipeHint, setSwipeHint] = useState<null | "edge-prev" | "edge-next">(null);
+  const [readProgress, setReadProgress] = useState(0);
+  const [resumeOffset, setResumeOffset] = useState<number | null>(null);
+
+  // Track scroll progress within the article and persist last position per slug
+  useEffect(() => {
+    const storageKey = `article:progress:${article.slug}`;
+    let raf = 0;
+    let lastSaved = 0;
+    const compute = () => {
+      raf = 0;
+      const doc = document.documentElement;
+      const total = doc.scrollHeight - window.innerHeight;
+      const y = window.scrollY;
+      const ratio = total > 0 ? Math.min(1, Math.max(0, y / total)) : 0;
+      setReadProgress(ratio);
+      const now = Date.now();
+      if (ratio > 0.05 && ratio < 0.95 && now - lastSaved > 600) {
+        lastSaved = now;
+        try {
+          localStorage.setItem(storageKey, JSON.stringify({ y, ratio, ts: now }));
+        } catch { /* ignore */ }
+      } else if (ratio >= 0.95) {
+        try { localStorage.removeItem(storageKey); } catch { /* ignore */ }
+      }
+    };
+    const onScroll = () => {
+      if (raf) return;
+      raf = window.requestAnimationFrame(compute);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    compute();
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [article.slug]);
+
+  // On article change, check for a saved resume position
+  useEffect(() => {
+    setResumeOffset(null);
+    if (typeof window === "undefined") return;
+    try {
+      const raw = localStorage.getItem(`article:progress:${article.slug}`);
+      if (!raw) return;
+      const saved = JSON.parse(raw) as { y: number; ratio: number; ts: number };
+      // Only offer resume if user hadn't just landed at the top recently and value is meaningful
+      if (saved && saved.y > 400 && saved.ratio < 0.9 && window.scrollY < 200) {
+        setResumeOffset(saved.y);
+      }
+    } catch { /* ignore */ }
+  }, [article.slug]);
+
+  const handleResume = () => {
+    if (resumeOffset == null) return;
+    window.scrollTo({ top: resumeOffset, behavior: "smooth" });
+    setResumeOffset(null);
+  };
 
   useEffect(() => {
     const ids: string[] = article.content.map((_s: { heading: string; body: string }, i: number) => `section-${i}`);
@@ -192,6 +251,19 @@ function ArticlePage() {
         onTouchEnd={onTouchEnd}
         className="relative touch-pan-y"
       >
+      <div
+        className="fixed top-0 left-0 right-0 z-[60] h-1 bg-transparent pointer-events-none"
+        role="progressbar"
+        aria-label="Tiến trình đọc bài"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={Math.round(readProgress * 100)}
+      >
+        <div
+          className="h-full bg-gradient-to-r from-imperial via-gold to-imperial transition-[width] duration-150 ease-out"
+          style={{ width: `${readProgress * 100}%` }}
+        />
+      </div>
       <article className="relative">
         <div className="aspect-[21/9] md:aspect-[21/7] w-full overflow-hidden">
           <img src={article.thumbnail} alt={article.title} className="w-full h-full object-cover" />
@@ -386,6 +458,31 @@ function ArticlePage() {
                 <ArrowRight className="h-4 w-4 text-imperial" />
               </>
             )}
+          </div>
+        </div>
+      )}
+      {resumeOffset != null && (
+        <div className="fixed inset-x-0 bottom-6 z-50 flex justify-center px-4">
+          <div className="pointer-events-auto flex items-center gap-2 rounded-full border border-gold/60 bg-background/95 backdrop-blur px-2 py-2 pl-4 text-sm shadow-lg animate-in fade-in slide-in-from-bottom-4">
+            <BookOpen className="h-4 w-4 text-imperial shrink-0" />
+            <span className="hidden sm:inline text-foreground/90">Bạn đã đọc tới khoảng {Math.round((resumeOffset / Math.max(1, document.documentElement.scrollHeight - window.innerHeight)) * 100)}%</span>
+            <span className="sm:hidden text-foreground/90">Tiếp tục đọc?</span>
+            <Button
+              size="sm"
+              onClick={handleResume}
+              className="rounded-full bg-imperial hover:bg-imperial/90 text-primary-foreground h-8"
+            >
+              Tiếp tục từ đoạn cuối
+              <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+            </Button>
+            <button
+              type="button"
+              onClick={() => setResumeOffset(null)}
+              aria-label="Đóng gợi ý tiếp tục đọc"
+              className="h-8 w-8 inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
+            >
+              <X className="h-4 w-4" />
+            </button>
           </div>
         </div>
       )}
