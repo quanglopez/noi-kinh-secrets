@@ -509,3 +509,38 @@ function ContextualLinks({ links }: { links: Article[] }) {
     </aside>
   );
 }
+
+function RelatedCard({ item, fromSlug }: { item: Article; fromSlug: string }) {
+  const ref = useRecoImpression<HTMLAnchorElement>(
+    "article-related",
+    item.slug,
+    `from=${fromSlug}`,
+  );
+  return (
+    <Link
+      ref={ref}
+      to="/bai-viet/$slug"
+      params={{ slug: item.slug }}
+      onClick={() => trackRecoClick("article-related", item.slug, `from=${fromSlug}`)}
+      className="group"
+      data-reco-surface="article-related"
+      data-reco-slug={item.slug}
+    >
+      <article className="ink-card rounded-sm overflow-hidden">
+        <div className="aspect-[16/10] overflow-hidden">
+          <img
+            src={item.thumbnail}
+            alt={item.title}
+            loading="lazy"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          />
+        </div>
+        <div className="p-5">
+          <span className="text-xs uppercase tracking-wider text-gold">{item.category}</span>
+          <h3 className="font-serif text-lg mt-2 group-hover:text-imperial transition-colors">{item.title}</h3>
+          <p className="text-xs text-muted-foreground mt-2 line-clamp-2">{item.excerpt}</p>
+        </div>
+      </article>
+    </Link>
+  );
+}
