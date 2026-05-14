@@ -32,6 +32,7 @@ export function SiteFooter() {
             <li><Link to="/gioi-thieu" className="hover:text-gold">Về chúng tôi</Link></li>
             <li><Link to="/luu-y-suc-khoe" className="hover:text-gold">Lưu ý y tế</Link></li>
             <li><a href="mailto:lienhe@hoangdenoikinh.vn" className="hover:text-gold">Liên hệ</a></li>
+            <li><a href="https://zalo.me/0708684608" target="_blank" rel="noopener noreferrer" className="hover:text-gold">Tư vấn Zalo · 0708 684 608</a></li>
             <li><a href="#" className="hover:text-gold">Chính sách bảo mật</a></li>
           </ul>
         </div>
