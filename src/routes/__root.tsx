@@ -76,10 +76,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "Trí tuệ ngàn năm về sức khoẻ, sinh lực và hạnh phúc lứa đôi từ kinh điển Đông y." },
       { name: "author", content: "Hoàng Đế Nội Kinh" },
       { property: "og:title", content: "Hoàng Đế Nội Kinh — Bí Kíp Dưỡng Sinh" },
-      { property: "og:description", content: "Trí tuệ ngàn năm về sức khoẻ và hạnh phúc lứa đôi." },
+      { property: "og:description", content: "Trí tuệ ngàn năm về sức khoẻ, sinh lực và hạnh phúc lứa đôi từ kinh điển Đông y." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@HoangDeNoiKinh" },
+      { name: "twitter:title", content: "Hoàng Đế Nội Kinh — Bí Kíp Dưỡng Sinh" },
+      { name: "twitter:description", content: "Trí tuệ ngàn năm về sức khoẻ, sinh lực và hạnh phúc lứa đôi từ kinh điển Đông y." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/32e8e774-1d7c-44f5-8370-a6c8de157986/id-preview-ea245a06--9bb579df-7fbc-425e-9f67-630bf4f471a1.lovable.app-1778764955478.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/32e8e774-1d7c-44f5-8370-a6c8de157986/id-preview-ea245a06--9bb579df-7fbc-425e-9f67-630bf4f471a1.lovable.app-1778764955478.png" },
     ],
     links: [
       {
