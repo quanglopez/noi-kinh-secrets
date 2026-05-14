@@ -332,6 +332,15 @@ function ArticlePage() {
                 </li>
               </ol>
             </nav>
+            <Link
+              to="/thu-vien"
+              search={backSearch}
+              className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-imperial hover:text-gold transition-colors mb-6 group"
+            >
+              <ArrowUpLeft className="h-3.5 w-3.5 group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              <span>Quay lại thư viện</span>
+              <span className="normal-case tracking-normal text-muted-foreground">· {backToLibrary.label}</span>
+            </Link>
             <div className="flex flex-wrap items-center gap-3 mb-6">
               <Badge className="bg-gold text-ink rounded-sm">{article.category}</Badge>
               <span className="text-sm text-muted-foreground">{article.readingTime}</span>
