@@ -9,38 +9,215 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ThuVienRouteImport } from './routes/thu-vien'
+import { Route as TaiKhoanRouteImport } from './routes/tai-khoan'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as LuuYSucKhoeRouteImport } from './routes/luu-y-suc-khoe'
+import { Route as KhoaHocRouteImport } from './routes/khoa-hoc'
+import { Route as HoiVienRouteImport } from './routes/hoi-vien'
+import { Route as GioiThieuRouteImport } from './routes/gioi-thieu'
+import { Route as CuaHangRouteImport } from './routes/cua-hang'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BaiVietSlugRouteImport } from './routes/bai-viet.$slug'
 
+const ThuVienRoute = ThuVienRouteImport.update({
+  id: '/thu-vien',
+  path: '/thu-vien',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TaiKhoanRoute = TaiKhoanRouteImport.update({
+  id: '/tai-khoan',
+  path: '/tai-khoan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LuuYSucKhoeRoute = LuuYSucKhoeRouteImport.update({
+  id: '/luu-y-suc-khoe',
+  path: '/luu-y-suc-khoe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KhoaHocRoute = KhoaHocRouteImport.update({
+  id: '/khoa-hoc',
+  path: '/khoa-hoc',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HoiVienRoute = HoiVienRouteImport.update({
+  id: '/hoi-vien',
+  path: '/hoi-vien',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GioiThieuRoute = GioiThieuRouteImport.update({
+  id: '/gioi-thieu',
+  path: '/gioi-thieu',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CuaHangRoute = CuaHangRouteImport.update({
+  id: '/cua-hang',
+  path: '/cua-hang',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BaiVietSlugRoute = BaiVietSlugRouteImport.update({
+  id: '/bai-viet/$slug',
+  path: '/bai-viet/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cua-hang': typeof CuaHangRoute
+  '/gioi-thieu': typeof GioiThieuRoute
+  '/hoi-vien': typeof HoiVienRoute
+  '/khoa-hoc': typeof KhoaHocRoute
+  '/luu-y-suc-khoe': typeof LuuYSucKhoeRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/tai-khoan': typeof TaiKhoanRoute
+  '/thu-vien': typeof ThuVienRoute
+  '/bai-viet/$slug': typeof BaiVietSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cua-hang': typeof CuaHangRoute
+  '/gioi-thieu': typeof GioiThieuRoute
+  '/hoi-vien': typeof HoiVienRoute
+  '/khoa-hoc': typeof KhoaHocRoute
+  '/luu-y-suc-khoe': typeof LuuYSucKhoeRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/tai-khoan': typeof TaiKhoanRoute
+  '/thu-vien': typeof ThuVienRoute
+  '/bai-viet/$slug': typeof BaiVietSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cua-hang': typeof CuaHangRoute
+  '/gioi-thieu': typeof GioiThieuRoute
+  '/hoi-vien': typeof HoiVienRoute
+  '/khoa-hoc': typeof KhoaHocRoute
+  '/luu-y-suc-khoe': typeof LuuYSucKhoeRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/tai-khoan': typeof TaiKhoanRoute
+  '/thu-vien': typeof ThuVienRoute
+  '/bai-viet/$slug': typeof BaiVietSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/cua-hang'
+    | '/gioi-thieu'
+    | '/hoi-vien'
+    | '/khoa-hoc'
+    | '/luu-y-suc-khoe'
+    | '/sitemap.xml'
+    | '/tai-khoan'
+    | '/thu-vien'
+    | '/bai-viet/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/cua-hang'
+    | '/gioi-thieu'
+    | '/hoi-vien'
+    | '/khoa-hoc'
+    | '/luu-y-suc-khoe'
+    | '/sitemap.xml'
+    | '/tai-khoan'
+    | '/thu-vien'
+    | '/bai-viet/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/cua-hang'
+    | '/gioi-thieu'
+    | '/hoi-vien'
+    | '/khoa-hoc'
+    | '/luu-y-suc-khoe'
+    | '/sitemap.xml'
+    | '/tai-khoan'
+    | '/thu-vien'
+    | '/bai-viet/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CuaHangRoute: typeof CuaHangRoute
+  GioiThieuRoute: typeof GioiThieuRoute
+  HoiVienRoute: typeof HoiVienRoute
+  KhoaHocRoute: typeof KhoaHocRoute
+  LuuYSucKhoeRoute: typeof LuuYSucKhoeRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TaiKhoanRoute: typeof TaiKhoanRoute
+  ThuVienRoute: typeof ThuVienRoute
+  BaiVietSlugRoute: typeof BaiVietSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/thu-vien': {
+      id: '/thu-vien'
+      path: '/thu-vien'
+      fullPath: '/thu-vien'
+      preLoaderRoute: typeof ThuVienRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tai-khoan': {
+      id: '/tai-khoan'
+      path: '/tai-khoan'
+      fullPath: '/tai-khoan'
+      preLoaderRoute: typeof TaiKhoanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/luu-y-suc-khoe': {
+      id: '/luu-y-suc-khoe'
+      path: '/luu-y-suc-khoe'
+      fullPath: '/luu-y-suc-khoe'
+      preLoaderRoute: typeof LuuYSucKhoeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/khoa-hoc': {
+      id: '/khoa-hoc'
+      path: '/khoa-hoc'
+      fullPath: '/khoa-hoc'
+      preLoaderRoute: typeof KhoaHocRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hoi-vien': {
+      id: '/hoi-vien'
+      path: '/hoi-vien'
+      fullPath: '/hoi-vien'
+      preLoaderRoute: typeof HoiVienRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gioi-thieu': {
+      id: '/gioi-thieu'
+      path: '/gioi-thieu'
+      fullPath: '/gioi-thieu'
+      preLoaderRoute: typeof GioiThieuRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cua-hang': {
+      id: '/cua-hang'
+      path: '/cua-hang'
+      fullPath: '/cua-hang'
+      preLoaderRoute: typeof CuaHangRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +225,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bai-viet/$slug': {
+      id: '/bai-viet/$slug'
+      path: '/bai-viet/$slug'
+      fullPath: '/bai-viet/$slug'
+      preLoaderRoute: typeof BaiVietSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CuaHangRoute: CuaHangRoute,
+  GioiThieuRoute: GioiThieuRoute,
+  HoiVienRoute: HoiVienRoute,
+  KhoaHocRoute: KhoaHocRoute,
+  LuuYSucKhoeRoute: LuuYSucKhoeRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TaiKhoanRoute: TaiKhoanRoute,
+  ThuVienRoute: ThuVienRoute,
+  BaiVietSlugRoute: BaiVietSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
