@@ -186,12 +186,13 @@ function ArticlePage() {
 
   return (
     <SiteLayout>
-      <article
+      <div
         ref={containerRef}
-        className="relative"
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
+        className="relative touch-pan-y"
       >
+      <article className="relative">
         <div className="aspect-[21/9] md:aspect-[21/7] w-full overflow-hidden">
           <img src={article.thumbnail} alt={article.title} className="w-full h-full object-cover" />
         </div>
@@ -367,6 +368,31 @@ function ArticlePage() {
           </div>
         </nav>
       )}
+      {swipeHint && (
+        <div
+          role="status"
+          aria-live="polite"
+          className="fixed inset-x-0 bottom-24 z-50 flex justify-center px-4 pointer-events-none"
+        >
+          <div className="rounded-full border border-border bg-background/95 backdrop-blur px-5 py-2.5 text-sm text-foreground shadow-lg flex items-center gap-2 animate-in fade-in slide-in-from-bottom-2">
+            {swipeHint === "edge-prev" ? (
+              <>
+                <ArrowLeft className="h-4 w-4 text-imperial" />
+                Đây là bài viết đầu tiên
+              </>
+            ) : (
+              <>
+                Đây là bài viết mới nhất
+                <ArrowRight className="h-4 w-4 text-imperial" />
+              </>
+            )}
+          </div>
+        </div>
+      )}
+      </div>
+      <p className="sr-only" aria-live="polite">
+        Mẹo: vuốt sang trái để chuyển bài tiếp theo, vuốt sang phải để quay lại bài trước.
+      </p>
     </SiteLayout>
   );
 }
