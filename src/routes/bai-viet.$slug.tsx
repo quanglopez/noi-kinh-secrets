@@ -1,6 +1,6 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
 import { Bookmark, Share2, Printer, Lock, ArrowRight, ArrowLeft, Link2, ChevronRight, Home } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SiteLayout } from "@/components/site/layout";
@@ -120,6 +120,10 @@ function ArticlePage() {
     excludeSlugs: related.map((a) => a.slug),
   });
   const [activeId, setActiveId] = useState<string>("section-0");
+  const navigate = useNavigate();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const touchStart = useRef<{ x: number; y: number; t: number } | null>(null);
+  const [swipeHint, setSwipeHint] = useState<null | "edge-prev" | "edge-next">(null);
 
   useEffect(() => {
     const ids: string[] = article.content.map((_s: { heading: string; body: string }, i: number) => `section-${i}`);
@@ -150,9 +154,44 @@ function ArticlePage() {
     setActiveId(id);
   };
 
+  // Swipe navigation (mobile/tablet) — left = next, right = prev
+  const onTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0];
+    touchStart.current = { x: t.clientX, y: t.clientY, t: Date.now() };
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    const start = touchStart.current;
+    touchStart.current = null;
+    if (!start) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - start.x;
+    const dy = t.clientY - start.y;
+    const dt = Date.now() - start.t;
+    if (dt > 600) return;
+    if (Math.abs(dx) < 70 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+    if (dx < 0) {
+      // swipe left -> next
+      if (next) navigate({ to: "/bai-viet/$slug", params: { slug: next.slug } });
+      else triggerEdge("edge-next");
+    } else {
+      // swipe right -> prev
+      if (prev) navigate({ to: "/bai-viet/$slug", params: { slug: prev.slug } });
+      else triggerEdge("edge-prev");
+    }
+  };
+  const triggerEdge = (kind: "edge-prev" | "edge-next") => {
+    setSwipeHint(kind);
+    window.setTimeout(() => setSwipeHint(null), 1400);
+  };
+
   return (
     <SiteLayout>
-      <article className="relative">
+      <article
+        ref={containerRef}
+        className="relative"
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
         <div className="aspect-[21/9] md:aspect-[21/7] w-full overflow-hidden">
           <img src={article.thumbnail} alt={article.title} className="w-full h-full object-cover" />
         </div>
