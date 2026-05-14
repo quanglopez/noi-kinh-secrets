@@ -304,3 +304,46 @@ export function getAdjacentArticles(current: Article): {
     next: idx < ordered.length - 1 ? ordered[idx + 1] : null,
   };
 }
+
+/**
+ * Suggest articles matching a free-text query and/or a category, excluding
+ * any slugs already shown. Scores by query keyword overlap (title/excerpt/
+ * category) plus a soft category bonus. Falls back to most recent items in
+ * the same category if no query is provided.
+ */
+export function getSuggestedArticles(opts: {
+  query?: string;
+  category?: string | null;
+  excludeSlugs?: string[];
+  limit?: number;
+}): Article[] {
+  const { query = "", category = null, excludeSlugs = [], limit = 4 } = opts;
+  const queryKw = new Set(tokenize(query));
+  const exclude = new Set(excludeSlugs);
+
+  const scored = articles
+    .filter((a) => !exclude.has(a.slug))
+    .map((a) => {
+      const kw = articleKeywords(a);
+      let overlap = 0;
+      queryKw.forEach((w) => {
+        if (kw.has(w)) overlap += 1;
+      });
+      const categoryBonus = category && a.category === category ? 3 : 0;
+      const recencyBonus =
+        (Date.now() - new Date(a.publishedAt).getTime()) /
+        (1000 * 60 * 60 * 24 * 365); // years old
+      return {
+        article: a,
+        score: overlap * 2 + categoryBonus - recencyBonus * 0.1,
+        hasMatch: overlap > 0 || categoryBonus > 0,
+      };
+    });
+
+  const meaningful = scored.filter((x) => x.hasMatch);
+  const pool = meaningful.length > 0 ? meaningful : scored;
+  return pool
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map((x) => x.article);
+}
