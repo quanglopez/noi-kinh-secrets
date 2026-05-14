@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SiteLayout } from "@/components/site/layout";
 import { articles, categories, getSuggestedArticles } from "@/lib/seed-data";
+import { useRecoImpression, trackRecoClick } from "@/lib/reco-analytics";
 
 export const Route = createFileRoute("/thu-vien")({
   head: () => ({
@@ -133,18 +134,15 @@ function LibraryPage() {
               </p>
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                 {suggested.map((a) => (
-                  <Link key={a.slug} to="/bai-viet/$slug" params={{ slug: a.slug }} className="group">
-                    <article className="ink-card rounded-sm overflow-hidden h-full flex flex-col">
-                      <div className="aspect-[16/10] overflow-hidden">
-                        <img src={a.thumbnail} alt={a.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                      </div>
-                      <div className="p-5 flex-1 flex flex-col">
-                        <span className="text-[10px] uppercase tracking-wider text-gold mb-2">{a.category}</span>
-                        <h3 className="font-serif text-base leading-snug group-hover:text-imperial transition-colors">{a.title}</h3>
-                        <p className="text-xs text-muted-foreground mt-2 line-clamp-2">{a.excerpt}</p>
-                      </div>
-                    </article>
-                  </Link>
+                  <SuggestedCard
+                    key={a.slug}
+                    slug={a.slug}
+                    title={a.title}
+                    excerpt={a.excerpt}
+                    category={a.category}
+                    thumbnail={a.thumbnail}
+                    context={`q=${q.trim() || "-"}|cat=${cat ?? "-"}`}
+                  />
                 ))}
               </div>
             </div>
@@ -152,5 +150,60 @@ function LibraryPage() {
         </div>
       </section>
     </SiteLayout>
+  );
+}
+
+function SuggestedCard({
+  slug,
+  title,
+  excerpt,
+  category,
+  thumbnail,
+  context,
+}: {
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  thumbnail: string;
+  context: string;
+}) {
+  const ref = useRecoImpression<HTMLAnchorElement>(
+    "library-suggested",
+    slug,
+    context,
+  );
+  return (
+    <Link
+      ref={ref}
+      to="/bai-viet/$slug"
+      params={{ slug }}
+      onClick={() => trackRecoClick("library-suggested", slug, context)}
+      className="group"
+      data-reco-surface="library-suggested"
+      data-reco-slug={slug}
+    >
+      <article className="ink-card rounded-sm overflow-hidden h-full flex flex-col">
+        <div className="aspect-[16/10] overflow-hidden">
+          <img
+            src={thumbnail}
+            alt={title}
+            loading="lazy"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          />
+        </div>
+        <div className="p-5 flex-1 flex flex-col">
+          <span className="text-[10px] uppercase tracking-wider text-gold mb-2">
+            {category}
+          </span>
+          <h3 className="font-serif text-base leading-snug group-hover:text-imperial transition-colors">
+            {title}
+          </h3>
+          <p className="text-xs text-muted-foreground mt-2 line-clamp-2">
+            {excerpt}
+          </p>
+        </div>
+      </article>
+    </Link>
   );
 }
