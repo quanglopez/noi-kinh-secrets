@@ -639,7 +639,7 @@ function ReadingProgressChip({
         <span
           className="relative inline-flex h-9 w-9 items-center justify-center rounded-full"
           style={{
-            background: `conic-gradient(hsl(var(--imperial, 0 0% 0%) / 1) ${pct}%, hsl(var(--muted, 0 0% 90%) / 0.6) ${pct}%)`,
+            background: `conic-gradient(var(--imperial) ${pct}%, var(--muted) ${pct}%)`,
           }}
         >
           <span className="absolute inset-1 rounded-full bg-background flex items-center justify-center">
