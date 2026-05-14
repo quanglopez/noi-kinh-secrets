@@ -526,11 +526,139 @@ function ArticlePage() {
           </div>
         </div>
       )}
+      <ReadingProgressChip
+        progress={readProgress}
+        sections={article.content.map((s, i) => ({ id: `section-${i}`, heading: s.heading }))}
+        activeId={activeId}
+        open={tocOpen}
+        onToggle={() => setTocOpen((v) => !v)}
+        onClose={() => setTocOpen(false)}
+        onJump={handleTocClick}
+      />
       </div>
       <p className="sr-only" aria-live="polite">
         Mẹo: vuốt sang trái để chuyển bài tiếp theo, vuốt sang phải để quay lại bài trước.
       </p>
     </SiteLayout>
+  );
+}
+
+function ReadingProgressChip({
+  progress,
+  sections,
+  activeId,
+  open,
+  onToggle,
+  onClose,
+  onJump,
+}: {
+  progress: number;
+  sections: { id: string; heading: string }[];
+  activeId: string;
+  open: boolean;
+  onToggle: () => void;
+  onClose: () => void;
+  onJump: (e: React.MouseEvent<HTMLAnchorElement>, id: string) => void;
+}) {
+  const pct = Math.round(progress * 100);
+  const activeIndex = Math.max(0, sections.findIndex((s) => s.id === activeId));
+  const activeSection = sections[activeIndex];
+  // Hide chip until the user has actually started reading and there's TOC content
+  if (sections.length === 0 || progress < 0.03) return null;
+  return (
+    <div className="fixed bottom-6 left-6 z-40 print:hidden">
+      {open && (
+        <div
+          role="dialog"
+          aria-label="Mục lục bài viết"
+          className="mb-3 w-72 sm:w-80 max-h-[60vh] overflow-y-auto rounded-md border border-border bg-background/98 backdrop-blur shadow-2xl animate-in fade-in slide-in-from-bottom-2"
+        >
+          <div className="flex items-center justify-between px-4 py-3 border-b border-border sticky top-0 bg-background/98 backdrop-blur">
+            <p className="text-[11px] uppercase tracking-[0.3em] text-imperial flex items-center gap-2">
+              <ListOrdered className="h-3.5 w-3.5" /> Mục lục
+            </p>
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Đóng mục lục"
+              className="h-7 w-7 inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+          <ol className="px-2 py-2 space-y-0.5">
+            {sections.map((s, i) => {
+              const isActive = s.id === activeId;
+              return (
+                <li key={s.id}>
+                  <a
+                    href={`#${s.id}`}
+                    onClick={(e) => onJump(e, s.id)}
+                    className={`flex items-start gap-3 rounded-sm px-3 py-2 text-sm transition-colors ${
+                      isActive
+                        ? "bg-imperial/10 text-imperial font-medium"
+                        : "text-foreground/80 hover:bg-muted/60 hover:text-foreground"
+                    }`}
+                  >
+                    <span
+                      className={`mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] tabular-nums ${
+                        isActive
+                          ? "bg-imperial text-primary-foreground"
+                          : "bg-muted text-muted-foreground"
+                      }`}
+                    >
+                      {i + 1}
+                    </span>
+                    <span className="leading-snug">{s.heading}</span>
+                  </a>
+                </li>
+              );
+            })}
+          </ol>
+          <div className="border-t border-border px-2 py-2">
+            <button
+              type="button"
+              onClick={() => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                onClose();
+              }}
+              className="w-full inline-flex items-center justify-center gap-2 rounded-sm px-3 py-2 text-xs uppercase tracking-[0.25em] text-imperial hover:bg-muted/60 transition-colors"
+            >
+              <ArrowUp className="h-3.5 w-3.5" /> Lên đầu trang
+            </button>
+          </div>
+        </div>
+      )}
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={open}
+        aria-label={`Đã đọc ${pct}% — mở mục lục`}
+        className="group flex items-center gap-3 rounded-full border border-gold/50 bg-background/95 backdrop-blur pl-2 pr-4 py-1.5 shadow-lg hover:border-imperial transition-colors"
+      >
+        <span
+          className="relative inline-flex h-9 w-9 items-center justify-center rounded-full"
+          style={{
+            background: `conic-gradient(hsl(var(--imperial, 0 0% 0%) / 1) ${pct}%, hsl(var(--muted, 0 0% 90%) / 0.6) ${pct}%)`,
+          }}
+        >
+          <span className="absolute inset-1 rounded-full bg-background flex items-center justify-center">
+            <span className="text-[10px] font-medium tabular-nums text-imperial">
+              {pct}%
+            </span>
+          </span>
+        </span>
+        <span className="hidden sm:flex flex-col items-start min-w-0 max-w-[180px]">
+          <span className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
+            Đoạn {activeIndex + 1}/{sections.length}
+          </span>
+          <span className="text-xs font-medium text-foreground truncate w-full text-left group-hover:text-imperial transition-colors">
+            {activeSection?.heading ?? ""}
+          </span>
+        </span>
+        <ListOrdered className="h-4 w-4 text-imperial sm:hidden" />
+      </button>
+    </div>
   );
 }
 
