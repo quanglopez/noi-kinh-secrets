@@ -19,6 +19,7 @@ import { Route as GoiYThongKeRouteImport } from './routes/goi-y-thong-ke'
 import { Route as GioiThieuRouteImport } from './routes/gioi-thieu'
 import { Route as CuaHangRouteImport } from './routes/cua-hang'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SachHoangDeNoiKinhChuGiaiRouteImport } from './routes/sach.hoang-de-noi-kinh-chu-giai'
 import { Route as BaiVietSlugRouteImport } from './routes/bai-viet.$slug'
 
 const ThuVienRoute = ThuVienRouteImport.update({
@@ -71,6 +72,12 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SachHoangDeNoiKinhChuGiaiRoute =
+  SachHoangDeNoiKinhChuGiaiRouteImport.update({
+    id: '/sach/hoang-de-noi-kinh-chu-giai',
+    path: '/sach/hoang-de-noi-kinh-chu-giai',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const BaiVietSlugRoute = BaiVietSlugRouteImport.update({
   id: '/bai-viet/$slug',
   path: '/bai-viet/$slug',
@@ -89,6 +96,7 @@ export interface FileRoutesByFullPath {
   '/tai-khoan': typeof TaiKhoanRoute
   '/thu-vien': typeof ThuVienRoute
   '/bai-viet/$slug': typeof BaiVietSlugRoute
+  '/sach/hoang-de-noi-kinh-chu-giai': typeof SachHoangDeNoiKinhChuGiaiRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -102,6 +110,7 @@ export interface FileRoutesByTo {
   '/tai-khoan': typeof TaiKhoanRoute
   '/thu-vien': typeof ThuVienRoute
   '/bai-viet/$slug': typeof BaiVietSlugRoute
+  '/sach/hoang-de-noi-kinh-chu-giai': typeof SachHoangDeNoiKinhChuGiaiRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -116,6 +125,7 @@ export interface FileRoutesById {
   '/tai-khoan': typeof TaiKhoanRoute
   '/thu-vien': typeof ThuVienRoute
   '/bai-viet/$slug': typeof BaiVietSlugRoute
+  '/sach/hoang-de-noi-kinh-chu-giai': typeof SachHoangDeNoiKinhChuGiaiRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -131,6 +141,7 @@ export interface FileRouteTypes {
     | '/tai-khoan'
     | '/thu-vien'
     | '/bai-viet/$slug'
+    | '/sach/hoang-de-noi-kinh-chu-giai'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -144,6 +155,7 @@ export interface FileRouteTypes {
     | '/tai-khoan'
     | '/thu-vien'
     | '/bai-viet/$slug'
+    | '/sach/hoang-de-noi-kinh-chu-giai'
   id:
     | '__root__'
     | '/'
@@ -157,6 +169,7 @@ export interface FileRouteTypes {
     | '/tai-khoan'
     | '/thu-vien'
     | '/bai-viet/$slug'
+    | '/sach/hoang-de-noi-kinh-chu-giai'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -171,6 +184,7 @@ export interface RootRouteChildren {
   TaiKhoanRoute: typeof TaiKhoanRoute
   ThuVienRoute: typeof ThuVienRoute
   BaiVietSlugRoute: typeof BaiVietSlugRoute
+  SachHoangDeNoiKinhChuGiaiRoute: typeof SachHoangDeNoiKinhChuGiaiRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -245,6 +259,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sach/hoang-de-noi-kinh-chu-giai': {
+      id: '/sach/hoang-de-noi-kinh-chu-giai'
+      path: '/sach/hoang-de-noi-kinh-chu-giai'
+      fullPath: '/sach/hoang-de-noi-kinh-chu-giai'
+      preLoaderRoute: typeof SachHoangDeNoiKinhChuGiaiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/bai-viet/$slug': {
       id: '/bai-viet/$slug'
       path: '/bai-viet/$slug'
@@ -267,6 +288,7 @@ const rootRouteChildren: RootRouteChildren = {
   TaiKhoanRoute: TaiKhoanRoute,
   ThuVienRoute: ThuVienRoute,
   BaiVietSlugRoute: BaiVietSlugRoute,
+  SachHoangDeNoiKinhChuGiaiRoute: SachHoangDeNoiKinhChuGiaiRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
