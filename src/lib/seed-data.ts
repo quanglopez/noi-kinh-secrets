@@ -138,7 +138,7 @@ export const products: Product[] = [
   {
      id: "ebook-noi-kinh",
      title: "Hoàng Đế Nội Kinh chú giải",
-    description: "Bản dịch và chú giải đầy đủ Tố Vấn và Linh Khu, kèm minh hoạ kinh mạch và bảng tra cứu thuật ngữ. 480 trang PDF chất lượng cao.",
+    description: "Bản dịch và chú giải đầy đủ Tố Vấn và Linh Khu, kèm minh hoạ kinh mạch và bảng tra cứu thuật ngữ. 75 trang PDF chất lượng cao.",
      price: 149000,
     type: "ebook",
     cover: ebook1,
@@ -158,7 +158,7 @@ export const products: Product[] = [
   {
     id: "ebook-duoc-thien",
     title: "Dược Thiện Bổ Thận — 49 Món Ăn Dưỡng Sinh Theo Mùa",
-    description: "eBook 140 trang, 49 món ăn — bài thuốc theo 4 mùa, nguyên liệu chợ Việt, làm tại nhà. Áp dụng nguyên lý Hoàng Đế Nội Kinh.",
+    description: "eBook 75 trang, 49 món ăn — bài thuốc theo 4 mùa, nguyên liệu chợ Việt, làm tại nhà. Áp dụng nguyên lý Hoàng Đế Nội Kinh.",
     price: 149000,
     type: "ebook",
     cover: ebook3,

@@ -51,7 +51,7 @@ export const Route = createFileRoute("/sach/21-bi-kip-phong-the-co-truyen")({
       {
         name: "description",
         content:
-          "eBook 120 trang chắt lọc Tố Nữ Kinh & Phòng Trung Thuật — 21 kỹ thuật dưỡng sinh phòng the, lộ trình 30 ngày. Ưu đãi 149.000đ.",
+          "eBook 75 trang chắt lọc Tố Nữ Kinh & Phòng Trung Thuật — 21 kỹ thuật dưỡng sinh phòng the, lộ trình 30 ngày. Ưu đãi 149.000đ.",
       },
       {
         property: "og:title",
@@ -75,7 +75,7 @@ export const Route = createFileRoute("/sach/21-bi-kip-phong-the-co-truyen")({
           "@type": "Product",
           name: "21 Bí Kíp Phòng The Cổ Truyền",
           description:
-            "eBook 120 trang về dưỡng sinh phòng the cổ truyền: 21 kỹ thuật + lộ trình 30 ngày + 3 bonus.",
+            "eBook 75 trang về dưỡng sinh phòng the cổ truyền: 21 kỹ thuật + lộ trình 30 ngày + 3 bonus.",
           brand: { "@type": "Brand", name: "Hoàng Đế Nội Kinh" },
           offers: {
             "@type": "Offer",
@@ -473,7 +473,7 @@ function ChaptersSection() {
     <section className="py-20 md:py-28 px-6 bg-card/40 border-b border-border">
       <div className="mx-auto max-w-4xl">
         <p className="text-xs uppercase tracking-[0.4em] text-imperial mb-4">
-          Bên trong 120 trang
+          Bên trong 75 trang
         </p>
         <h2 className="font-serif text-3xl md:text-5xl leading-tight mb-10">
           21 bí kíp — chia làm 6 phần thực hành
@@ -743,7 +743,7 @@ function CountdownDigit({ value, label }: { value: number; label: string }) {
 function OfferSection() {
   const { days, hours, minutes, seconds, ready } = useCountdown();
   const lines: { label: string; value: string }[] = [
-    { label: "eBook chính · 120 trang", value: formatVnd(149_000) },
+    { label: "eBook chính · 75 trang", value: formatVnd(149_000) },
     { label: "Bonus #1 · Video Bát Đoạn Cẩm", value: formatVnd(99_000) },
     { label: "Bonus #2 · Bảng theo dõi 30 ngày", value: formatVnd(99_000) },
     { label: "Bonus #3 · 7 công thức dược thiện", value: formatVnd(99_000) },

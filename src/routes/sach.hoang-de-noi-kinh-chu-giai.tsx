@@ -52,7 +52,7 @@ export const Route = createFileRoute("/sach/hoang-de-noi-kinh-chu-giai")({
       {
         name: "description",
         content:
-          "eBook 220 trang dịch và chú giải Hoàng Đế Nội Kinh bằng tiếng Việt hiện đại, kèm lộ trình dưỡng sinh 30 ngày. Ưu đãi ra mắt 149.000đ.",
+          "eBook 75 trang dịch và chú giải Hoàng Đế Nội Kinh bằng tiếng Việt hiện đại, kèm lộ trình dưỡng sinh 30 ngày. Ưu đãi ra mắt 149.000đ.",
       },
       {
         property: "og:title",
@@ -77,7 +77,7 @@ export const Route = createFileRoute("/sach/hoang-de-noi-kinh-chu-giai")({
           "@type": "Product",
           name: "Hoàng Đế Nội Kinh Chú Giải",
           description:
-            "eBook 220 trang dịch và chú giải Hoàng Đế Nội Kinh, kèm lộ trình dưỡng sinh 30 ngày và 3 bonus.",
+            "eBook 75 trang dịch và chú giải Hoàng Đế Nội Kinh, kèm lộ trình dưỡng sinh 30 ngày và 3 bonus.",
           image: `${PAGE_URL.replace(/\/sach.*/, "")}/og-image.png`,
           brand: { "@type": "Brand", name: "Hoàng Đế Nội Kinh" },
           offers: {
@@ -448,7 +448,7 @@ function ChaptersSection() {
     <section className="py-20 md:py-28 px-6 bg-card/40 border-b border-border">
       <div className="mx-auto max-w-4xl">
         <p className="text-xs uppercase tracking-[0.4em] text-imperial mb-4">
-          Bên trong 220 trang
+          Bên trong 75 trang
         </p>
         <h2 className="font-serif text-3xl md:text-5xl leading-tight mb-10">
           Hành trình 8 chương — từ nền tảng đến tinh hoa
@@ -709,7 +709,7 @@ function CountdownDigit({ value, label }: { value: number; label: string }) {
 function OfferSection() {
   const { days, hours, minutes, seconds, ready } = useCountdown();
   const lines: { label: string; value: string; muted?: boolean }[] = [
-    { label: "eBook chính · 220 trang", value: formatVnd(199_000) },
+    { label: "eBook chính · 75 trang", value: formatVnd(199_000) },
     { label: "Bonus #1 · Bảng 30 huyệt đạo", value: formatVnd(99_000) },
     { label: "Bonus #2 · Lịch dưỡng sinh 12 tháng", value: formatVnd(99_000) },
     { label: "Bonus #3 · Video 10 bài khí công", value: formatVnd(99_000) },
