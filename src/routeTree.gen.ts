@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VideoAdsRouteImport } from './routes/video-ads'
 import { Route as ThuVienRouteImport } from './routes/thu-vien'
 import { Route as TaiKhoanRouteImport } from './routes/tai-khoan'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
@@ -25,6 +26,11 @@ import { Route as SachDuocThienBoThanRouteImport } from './routes/sach.duoc-thie
 import { Route as Sach21BiKipPhongTheCoTruyenRouteImport } from './routes/sach.21-bi-kip-phong-the-co-truyen'
 import { Route as BaiVietSlugRouteImport } from './routes/bai-viet.$slug'
 
+const VideoAdsRoute = VideoAdsRouteImport.update({
+  id: '/video-ads',
+  path: '/video-ads',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ThuVienRoute = ThuVienRouteImport.update({
   id: '/thu-vien',
   path: '/thu-vien',
@@ -114,6 +120,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tai-khoan': typeof TaiKhoanRoute
   '/thu-vien': typeof ThuVienRoute
+  '/video-ads': typeof VideoAdsRoute
   '/bai-viet/$slug': typeof BaiVietSlugRoute
   '/sach/21-bi-kip-phong-the-co-truyen': typeof Sach21BiKipPhongTheCoTruyenRoute
   '/sach/duoc-thien-bo-than': typeof SachDuocThienBoThanRoute
@@ -131,6 +138,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tai-khoan': typeof TaiKhoanRoute
   '/thu-vien': typeof ThuVienRoute
+  '/video-ads': typeof VideoAdsRoute
   '/bai-viet/$slug': typeof BaiVietSlugRoute
   '/sach/21-bi-kip-phong-the-co-truyen': typeof Sach21BiKipPhongTheCoTruyenRoute
   '/sach/duoc-thien-bo-than': typeof SachDuocThienBoThanRoute
@@ -149,6 +157,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tai-khoan': typeof TaiKhoanRoute
   '/thu-vien': typeof ThuVienRoute
+  '/video-ads': typeof VideoAdsRoute
   '/bai-viet/$slug': typeof BaiVietSlugRoute
   '/sach/21-bi-kip-phong-the-co-truyen': typeof Sach21BiKipPhongTheCoTruyenRoute
   '/sach/duoc-thien-bo-than': typeof SachDuocThienBoThanRoute
@@ -168,6 +177,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/tai-khoan'
     | '/thu-vien'
+    | '/video-ads'
     | '/bai-viet/$slug'
     | '/sach/21-bi-kip-phong-the-co-truyen'
     | '/sach/duoc-thien-bo-than'
@@ -185,6 +195,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/tai-khoan'
     | '/thu-vien'
+    | '/video-ads'
     | '/bai-viet/$slug'
     | '/sach/21-bi-kip-phong-the-co-truyen'
     | '/sach/duoc-thien-bo-than'
@@ -202,6 +213,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/tai-khoan'
     | '/thu-vien'
+    | '/video-ads'
     | '/bai-viet/$slug'
     | '/sach/21-bi-kip-phong-the-co-truyen'
     | '/sach/duoc-thien-bo-than'
@@ -220,6 +232,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TaiKhoanRoute: typeof TaiKhoanRoute
   ThuVienRoute: typeof ThuVienRoute
+  VideoAdsRoute: typeof VideoAdsRoute
   BaiVietSlugRoute: typeof BaiVietSlugRoute
   Sach21BiKipPhongTheCoTruyenRoute: typeof Sach21BiKipPhongTheCoTruyenRoute
   SachDuocThienBoThanRoute: typeof SachDuocThienBoThanRoute
@@ -229,6 +242,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/video-ads': {
+      id: '/video-ads'
+      path: '/video-ads'
+      fullPath: '/video-ads'
+      preLoaderRoute: typeof VideoAdsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/thu-vien': {
       id: '/thu-vien'
       path: '/thu-vien'
@@ -348,6 +368,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TaiKhoanRoute: TaiKhoanRoute,
   ThuVienRoute: ThuVienRoute,
+  VideoAdsRoute: VideoAdsRoute,
   BaiVietSlugRoute: BaiVietSlugRoute,
   Sach21BiKipPhongTheCoTruyenRoute: Sach21BiKipPhongTheCoTruyenRoute,
   SachDuocThienBoThanRoute: SachDuocThienBoThanRoute,

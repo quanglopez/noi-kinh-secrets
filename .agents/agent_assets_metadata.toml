@@ -1,0 +1,20 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "GFgY15YO1eB6SEGd4IHhq"
+uri = "file://public/images/parchment-bg.png"
+type = "image"
+title = "warm ancient parchment texture"
+
+[[generated]]
+id = "LqNe8YIYrjYctUTJ65W0L"
+uri = "file://public/images/herbs.png"
+type = "image"
+title = "traditional chinese medicine herbs"
+
+[[generated]]
+id = "pJjgVVofYpoYlNOmqo7Rk"
+uri = "file://public/images/yin-yang.png"
+type = "image"
+title = "gold yin yang motif"
