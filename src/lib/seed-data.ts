@@ -5,7 +5,7 @@ import article4 from "@/assets/article-4.jpg";
 import article5 from "@/assets/article-5.jpg";
 import article6 from "@/assets/article-6.jpg";
  import ebook1 from "@/assets/ebook-noi-kinh-cover.png";
-import ebook2 from "@/assets/ebook-2.jpg";
+ import ebook2 from "@/assets/ebook-21-bi-kip-cover.jpg";
 import ebook3 from "@/assets/ebook-3.jpg";
 
 export type Article = {
