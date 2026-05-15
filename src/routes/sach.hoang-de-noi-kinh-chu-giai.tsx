@@ -1109,3 +1109,134 @@ void useMemo;
 void useRef;
 void Sparkles;
 void ChevronDown;
+
+/* -------------------------- Bank Transfer + QR -------------------------- */
+const BANK_INFO = {
+  bank: "MB Bank (Quân Đội)",
+  account: "8873333333",
+  holder: "CAO NHAT QUANG",
+  content: "NK [Email của bạn]",
+  amount: PRICE_NOW,
+};
+
+function BankTransferQr() {
+  const [copied, setCopied] = useState<string | null>(null);
+  const [showQr, setShowQr] = useState(true);
+
+  const copy = async (label: string, value: string) => {
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopied(label);
+      setTimeout(() => setCopied(null), 1500);
+    } catch {
+      /* ignore */
+    }
+  };
+
+  return (
+    <div className="border-2 border-gold/60 rounded-sm bg-card/60 overflow-hidden">
+      <div className="flex items-center justify-between px-4 py-3 bg-gold/10 border-b border-gold/30">
+        <p className="text-xs uppercase tracking-[0.25em] text-gold flex items-center gap-2">
+          <QrCode className="h-3.5 w-3.5" /> Chuyển khoản qua VietQR
+        </p>
+        <button
+          type="button"
+          onClick={() => setShowQr((v) => !v)}
+          className="text-xs text-muted-foreground hover:text-foreground underline-offset-2 hover:underline"
+        >
+          {showQr ? "Ẩn QR" : "Hiện QR"}
+        </button>
+      </div>
+
+      {showQr && (
+        <div className="flex justify-center p-4 bg-background">
+          <img
+            src={qrPaymentImg}
+            alt="Mã VietQR thanh toán MB Bank — Cao Nhat Quang 8873333333"
+            className="w-48 h-auto rounded-sm shadow-md"
+            loading="lazy"
+          />
+        </div>
+      )}
+
+      <div className="p-4 space-y-2 text-sm">
+        <Row label="Ngân hàng" value={BANK_INFO.bank} />
+        <Row
+          label="Số tài khoản"
+          value={BANK_INFO.account}
+          copyValue={BANK_INFO.account}
+          copied={copied === "stk"}
+          onCopy={() => copy("stk", BANK_INFO.account)}
+          mono
+        />
+        <Row label="Chủ tài khoản" value={BANK_INFO.holder} />
+        <Row
+          label="Số tiền"
+          value={formatVnd(BANK_INFO.amount)}
+          copyValue={String(BANK_INFO.amount)}
+          copied={copied === "amt"}
+          onCopy={() => copy("amt", String(BANK_INFO.amount))}
+          highlight
+        />
+        <Row
+          label="Nội dung CK"
+          value={BANK_INFO.content}
+          copyValue="NK"
+          copied={copied === "note"}
+          onCopy={() => copy("note", "NK")}
+          mono
+        />
+        <p className="text-[11px] text-muted-foreground pt-2 leading-relaxed">
+          Sau khi chuyển khoản, vui lòng nhắn Zalo <span className="font-medium text-foreground">0708 684 608</span> kèm ảnh
+          biên lai và email — chúng tôi gửi link tải PDF + bonus trong vòng 5 phút.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function Row({
+  label,
+  value,
+  copyValue,
+  copied,
+  onCopy,
+  mono,
+  highlight,
+}: {
+  label: string;
+  value: string;
+  copyValue?: string;
+  copied?: boolean;
+  onCopy?: () => void;
+  mono?: boolean;
+  highlight?: boolean;
+}) {
+  return (
+    <div className="flex items-center justify-between gap-3">
+      <span className="text-xs uppercase tracking-wider text-muted-foreground shrink-0">
+        {label}
+      </span>
+      <div className="flex items-center gap-2 min-w-0">
+        <span
+          className={`truncate ${mono ? "font-mono" : "font-medium"} ${
+            highlight ? "font-serif text-imperial text-base" : "text-foreground"
+          }`}
+        >
+          {value}
+        </span>
+        {copyValue && onCopy && (
+          <button
+            type="button"
+            onClick={onCopy}
+            className="inline-flex items-center gap-1 text-[11px] text-imperial hover:text-imperial/80 border border-imperial/30 rounded-sm px-2 py-0.5 shrink-0"
+            aria-label={`Sao chép ${label}`}
+          >
+            <Copy className="h-3 w-3" />
+            {copied ? "Đã sao chép" : "Copy"}
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
