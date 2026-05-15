@@ -15,8 +15,37 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Hoàng Đế Nội Kinh — Bí Kíp Dưỡng Sinh" },
       { property: "og:description", content: "Trí tuệ ngàn năm về sức khoẻ và hạnh phúc lứa đôi." },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://hoang-de-noi-kinh.lovable.app/" },
     ],
     links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Hoàng Đế Nội Kinh — Bí Kíp Dưỡng Sinh",
+          url: "https://hoang-de-noi-kinh.lovable.app/",
+          inLanguage: "vi-VN",
+          potentialAction: {
+            "@type": "SearchAction",
+            target: "https://hoang-de-noi-kinh.lovable.app/thu-vien?q={search_term_string}",
+            "query-input": "required name=search_term_string",
+          },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "Hoàng Đế Nội Kinh",
+          url: "https://hoang-de-noi-kinh.lovable.app/",
+          logo: "https://hoang-de-noi-kinh.lovable.app/og-image.png",
+          description: "Dự án phổ biến tri thức Đông y dưỡng sinh cổ truyền bằng tiếng Việt hiện đại.",
+        }),
+      },
+    ],
   }),
   component: HomePage,
 });
