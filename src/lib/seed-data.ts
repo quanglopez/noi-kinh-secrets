@@ -6,7 +6,7 @@ import article5 from "@/assets/article-5.jpg";
 import article6 from "@/assets/article-6.jpg";
  import ebook1 from "@/assets/ebook-noi-kinh-cover.png";
  import ebook2 from "@/assets/ebook-21-bi-kip-cover.jpg";
-import ebook3 from "@/assets/ebook-3.jpg";
+import ebook3 from "@/assets/ebook-duoc-thien-cover.jpg";
 
 export type Article = {
   slug: string;
@@ -157,9 +157,9 @@ export const products: Product[] = [
   },
   {
     id: "ebook-duoc-thien",
-    title: "Thực đơn dược thiện bổ thận 30 ngày",
-    description: "30 công thức món ăn — bài thuốc dễ làm tại nhà, sử dụng dược liệu Việt Nam, kèm bảng phân chia theo thể trạng.",
-    price: 199000,
+    title: "Dược Thiện Bổ Thận — 49 Món Ăn Dưỡng Sinh Theo Mùa",
+    description: "eBook 140 trang, 49 món ăn — bài thuốc theo 4 mùa, nguyên liệu chợ Việt, làm tại nhà. Áp dụng nguyên lý Hoàng Đế Nội Kinh.",
+    price: 149000,
     type: "ebook",
     cover: ebook3,
     rating: 4.7,
