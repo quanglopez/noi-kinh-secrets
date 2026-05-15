@@ -146,8 +146,8 @@ export const products: Product[] = [
     reviews: 218,
   },
   {
-    id: "ebook-khi-cong",
-    title: "21 bài khí công phòng the cổ truyền",
+     id: "ebook-21-bi-kip",
+     title: "21 Bí Kíp Phòng The Cổ Truyền",
     description: "Tuyển tập 21 bài tập khí công truyền thống, hướng dẫn từng bước với hình minh hoạ và video demo đi kèm.",
     price: 299000,
     type: "ebook",
