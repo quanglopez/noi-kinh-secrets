@@ -12,8 +12,36 @@ export const Route = createFileRoute("/khoa-hoc")({
       { name: "description", content: "Khoá học trực tuyến về Hoàng Đế Nội Kinh, khí công dưỡng sinh và dược thiện cổ truyền." },
       { property: "og:title", content: "Khoá học Đông y dưỡng sinh" },
       { property: "og:description", content: "Học Đông y dưỡng sinh cùng lương y và chuyên gia Việt Nam." },
+      { property: "og:url", content: "https://hoang-de-noi-kinh.lovable.app/khoa-hoc" },
+      { property: "og:type", content: "website" },
     ],
     links: [{ rel: "canonical", href: "/khoa-hoc" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: [
+            {
+              "@type": "Question",
+              name: "Khoá học có thời hạn không?",
+              acceptedAnswer: { "@type": "Answer", text: "Sau khi ghi danh, bạn có quyền truy cập trọn đời và nhận cập nhật miễn phí từ giảng viên." },
+            },
+            {
+              "@type": "Question",
+              name: "Tôi có được tương tác với giảng viên?",
+              acceptedAnswer: { "@type": "Answer", text: "Có. Mỗi khoá đều có nhóm Zalo riêng và buổi Q&A trực tuyến hàng tháng với giảng viên." },
+            },
+            {
+              "@type": "Question",
+              name: "Có chứng chỉ hoàn thành không?",
+              acceptedAnswer: { "@type": "Answer", text: "Sau khi hoàn thành 100% bài học và bài kiểm tra cuối khoá, bạn nhận chứng chỉ điện tử có chữ ký giảng viên." },
+            },
+          ],
+        }),
+      },
+    ],
   }),
   component: CoursesPage,
 });
