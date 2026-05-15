@@ -1,6 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Mail, Lock } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
+import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -19,6 +21,48 @@ export const Route = createFileRoute("/tai-khoan")({
 
 function AccountPage() {
   const [mode, setMode] = useState<"signin" | "signup">("signin");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      if (data.session) navigate({ to: "/" });
+    });
+  }, [navigate]);
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      if (mode === "signup") {
+        const { error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            emailRedirectTo: `${window.location.origin}/`,
+            data: { full_name: name },
+          },
+        });
+        if (error) throw error;
+        toast.success("Đăng ký thành công! Đang chuyển hướng...");
+        navigate({ to: "/" });
+      } else {
+        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+        toast.success("Đăng nhập thành công!");
+        navigate({ to: "/" });
+      }
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Đã có lỗi xảy ra";
+      toast.error(msg);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <SiteLayout>
       <section className="py-24 px-6 min-h-[80vh] flex items-center">
@@ -37,29 +81,29 @@ function AccountPage() {
               <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-border" /></div>
               <div className="relative flex justify-center text-xs"><span className="bg-card px-3 text-muted-foreground uppercase tracking-wider">hoặc</span></div>
             </div>
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit}>
               {mode === "signup" && (
                 <div>
                   <Label htmlFor="name">Họ và tên</Label>
-                  <Input id="name" type="text" placeholder="Nguyễn Văn A" className="rounded-sm mt-1" />
+                  <Input id="name" type="text" placeholder="Nguyễn Văn A" className="rounded-sm mt-1" value={name} onChange={(e) => setName(e.target.value)} />
                 </div>
               )}
               <div>
                 <Label htmlFor="email">Email</Label>
                 <div className="relative mt-1">
                   <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input id="email" type="email" placeholder="ban@example.com" className="pl-9 rounded-sm" />
+                  <Input id="email" type="email" placeholder="ban@example.com" className="pl-9 rounded-sm" value={email} onChange={(e) => setEmail(e.target.value)} required />
                 </div>
               </div>
               <div>
                 <Label htmlFor="password">Mật khẩu</Label>
                 <div className="relative mt-1">
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input id="password" type="password" placeholder="••••••••" className="pl-9 rounded-sm" />
+                  <Input id="password" type="password" placeholder="••••••••" className="pl-9 rounded-sm" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} />
                 </div>
               </div>
-              <Button type="submit" className="w-full bg-imperial hover:bg-imperial/90 text-primary-foreground rounded-sm">
-                {mode === "signin" ? "Đăng nhập" : "Đăng ký miễn phí"}
+              <Button type="submit" disabled={loading} className="w-full bg-imperial hover:bg-imperial/90 text-primary-foreground rounded-sm">
+                {loading ? "Đang xử lý..." : mode === "signin" ? "Đăng nhập" : "Đăng ký miễn phí"}
               </Button>
             </form>
             <p className="text-center text-sm text-muted-foreground mt-6">
