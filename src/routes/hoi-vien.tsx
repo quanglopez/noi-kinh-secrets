@@ -32,8 +32,8 @@ const features = [
 
 const tiers = [
   { name: "Miễn phí", price: 0, popular: false },
-  { name: "Học giả", price: 99000, popular: true },
-  { name: "Đại sư", price: 299000, popular: false },
+  { name: "Học giả", price: 199000, popular: true },
+  { name: "Đại sư", price: 399000, popular: false },
 ];
 
 function MembershipPage() {

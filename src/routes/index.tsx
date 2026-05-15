@@ -32,8 +32,8 @@ const benefits = [
 
 const tiers = [
   { name: "Miễn phí", price: 0, tag: "Khởi đầu", features: ["Truy cập 30+ bài viết cơ bản", "Newsletter hàng tuần", "Cộng đồng diễn đàn"], cta: "Bắt đầu" },
-  { name: "Học giả", price: 99000, tag: "Phổ biến", popular: true, features: ["Toàn bộ thư viện bài viết", "Tải eBook chọn lọc", "Khoá học cơ bản", "Hỏi đáp chuyên gia hàng tháng"], cta: "Trở thành Học giả" },
-  { name: "Đại sư", price: 299000, tag: "Trọn vẹn", features: ["Mọi quyền lợi Học giả", "Toàn bộ khoá học cao cấp", "Tư vấn 1:1 với lương y", "Quà tặng eBook hàng quý", "Sự kiện offline độc quyền"], cta: "Đăng ký Đại sư" },
+  { name: "Học giả", price: 199000, tag: "Phổ biến", popular: true, features: ["Toàn bộ thư viện bài viết", "Tải eBook chọn lọc", "Khoá học cơ bản", "Hỏi đáp chuyên gia hàng tháng"], cta: "Trở thành Học giả" },
+  { name: "Đại sư", price: 399000, tag: "Trọn vẹn", features: ["Mọi quyền lợi Học giả", "Toàn bộ khoá học cao cấp", "Tư vấn 1:1 với lương y", "Quà tặng eBook hàng quý", "Sự kiện offline độc quyền"], cta: "Đăng ký Đại sư" },
 ];
 
 const testimonials = [
