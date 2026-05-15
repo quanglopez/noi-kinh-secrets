@@ -7,10 +7,12 @@ import {
   CheckCircle2,
   ChevronDown,
   Clock,
+  Copy,
   Download,
   Gift,
   Mail,
   Play,
+  QrCode,
   ShieldCheck,
   Sparkles,
   Star,
@@ -33,6 +35,7 @@ import {
 } from "@/components/ui/dialog";
 import { SiteLayout } from "@/components/site/layout";
 import coverImg from "@/assets/ebook-noi-kinh-cover.png";
+import qrPaymentImg from "@/assets/qr-payment-mb.png";
 
 const PAGE_URL =
   "https://hoang-de-noi-kinh.lovable.app/sach/hoang-de-noi-kinh-chu-giai";
@@ -1089,20 +1092,7 @@ function CheckoutDialog() {
           </div>
           <Mail className="h-4 w-4 text-imperial" />
         </a>
-        <div className="border border-border rounded-sm p-4 bg-card/50">
-          <p className="text-xs uppercase tracking-[0.25em] text-gold mb-2">
-            Chuyển khoản trực tiếp
-          </p>
-          <p className="text-sm text-foreground/90">
-            <span className="font-medium">Vietcombank</span> · 0711000123456
-          </p>
-          <p className="text-sm text-foreground/90">
-            Chủ TK: <span className="font-medium">CT TNHH HĐ Nội Kinh</span>
-          </p>
-          <p className="text-xs text-muted-foreground mt-2">
-            Nội dung CK: <span className="font-mono">NK [Email của bạn]</span>
-          </p>
-        </div>
+        <BankTransferQr />
         <div className="flex items-center justify-between pt-2 text-sm">
           <span className="text-muted-foreground">Tổng thanh toán</span>
           <span className="font-serif text-2xl text-imperial">
