@@ -25,6 +25,8 @@ export const Route = createFileRoute("/sach/")({
         property: "og:description",
         content: "Tuyển tập eBook PDF Đông y cao cấp bằng tiếng Việt.",
       },
+      { property: "og:url", content: "https://hoang-de-noi-kinh.lovable.app/sach" },
+      { property: "og:type", content: "website" },
     ],
     links: [{ rel: "canonical", href: "/sach" }],
   }),
