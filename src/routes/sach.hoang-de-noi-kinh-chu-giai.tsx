@@ -47,8 +47,7 @@ export const Route = createFileRoute("/sach/hoang-de-noi-kinh-chu-giai")({
   head: () => ({
     meta: [
       {
-        title:
-          "Hoàng Đế Nội Kinh Chú Giải — Bí mật dưỡng sinh của bậc đế vương",
+        title: "Hoàng Đế Nội Kinh Chú Giải — eBook dưỡng sinh",
       },
       {
         name: "description",
@@ -57,8 +56,7 @@ export const Route = createFileRoute("/sach/hoang-de-noi-kinh-chu-giai")({
       },
       {
         property: "og:title",
-        content:
-          "Hoàng Đế Nội Kinh Chú Giải — Bí mật dưỡng sinh của bậc đế vương",
+        content: "Hoàng Đế Nội Kinh Chú Giải — eBook dưỡng sinh",
       },
       {
         property: "og:description",
@@ -94,6 +92,22 @@ export const Route = createFileRoute("/sach/hoang-de-noi-kinh-chu-giai")({
             ratingValue: "4.9",
             reviewCount: "127",
           },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: [
+            { "@type": "Question", name: "Tôi không biết gì về Đông y, đọc có hiểu không?", acceptedAnswer: { "@type": "Answer", text: "Hoàn toàn có. Cuốn sách viết bằng tiếng Việt hiện đại, có ví dụ thực tế cho người Việt. Không cần kiến thức nền." } },
+            { "@type": "Question", name: "Sách dành cho nam hay nữ?", acceptedAnswer: { "@type": "Answer", text: "Cả hai. 7/8 chương áp dụng cho mọi giới. Chương 8 (Phòng trung) viết trung tính, có phần riêng cho nam và nữ." } },
+            { "@type": "Question", name: "Tôi nhận sách như thế nào?", acceptedAnswer: { "@type": "Answer", text: "Ngay sau khi thanh toán, link tải PDF + bonus sẽ được gửi vào email trong 2 phút. Đọc được trên mọi thiết bị." } },
+            { "@type": "Question", name: "Có bản in giấy không?", acceptedAnswer: { "@type": "Answer", text: "Hiện tại chỉ có bản PDF/eBook. Bản in dự kiến phát hành Q3/2026 (giá ~399.000đ)." } },
+            { "@type": "Question", name: "Sách có thay thế tư vấn bác sĩ không?", acceptedAnswer: { "@type": "Answer", text: "Không. Đây là sách dưỡng sinh tham khảo, không phải sách kê đơn. Mọi vấn đề bệnh lý cần gặp bác sĩ." } },
+            { "@type": "Question", name: "Tôi đã 60 tuổi, có muộn không?", acceptedAnswer: { "@type": "Answer", text: "Không bao giờ muộn. Chương 7 có phần dành riêng cho độ tuổi 50–70." } },
+            { "@type": "Question", name: "Thanh toán có an toàn không?", acceptedAnswer: { "@type": "Answer", text: "Cổng thanh toán mã hoá SSL, hỗ trợ Momo, VietQR, thẻ quốc tế qua Stripe." } },
+          ],
         }),
       },
     ],
