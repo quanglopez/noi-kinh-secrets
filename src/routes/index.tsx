@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, BookOpen, Sparkles, HeartHandshake, Wind, Leaf, Lock, Check, Quote } from "lucide-react";
+import { ArrowRight, BookOpen, Sparkles, HeartHandshake, Wind, Leaf, Lock, Check, Quote, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -139,6 +139,35 @@ function HomePage() {
               </Link>
             </div>
           </div>
+        </div>
+        {/* Scroll hint */}
+        <a
+          href="#stats"
+          aria-label="Cuộn xuống để khám phá"
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-imperial/80 hover:text-imperial transition-colors animate-bounce"
+        >
+          <span className="text-[10px] uppercase tracking-[0.4em]">Cuộn xuống để khám phá</span>
+          <ChevronDown className="h-5 w-5" strokeWidth={1.5} />
+        </a>
+      </section>
+
+      {/* QUICK STATS BAR */}
+      <section id="stats" className="border-b border-border bg-card/40">
+        <div className="mx-auto max-w-6xl px-6 py-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm md:text-base">
+          {[
+            { value: "100+", label: "bài viết" },
+            { value: "3", label: "chuyên gia" },
+            { value: "500+", label: "học viên" },
+            { value: "4.000 năm", label: "trí tuệ" },
+          ].map((s, i) => (
+            <div key={s.label} className="flex items-center gap-8">
+              {i > 0 && <span className="text-gold/60 select-none" aria-hidden>·</span>}
+              <div className="flex items-baseline gap-2">
+                <span className="font-serif text-xl md:text-2xl text-imperial">{s.value}</span>
+                <span className="text-xs md:text-sm uppercase tracking-wider text-muted-foreground">{s.label}</span>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
