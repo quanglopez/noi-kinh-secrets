@@ -1,0 +1,27 @@
+# Hoàng Đế Nội Kinh — Bí Kíp Dưỡng Sinh
+
+> Trí tuệ ngàn năm về sức khoẻ, sinh lực và hạnh phúc lứa đôi từ Hoàng Đế Nội Kinh, Tố Nữ Kinh và Phòng Trung Thuật — biên dịch và chú giải bằng tiếng Việt hiện đại.
+
+Website tiếng Việt chuyên về Đông y dưỡng sinh cổ truyền: kinh điển chú giải, khí công, dược thiện, âm dương hoà hợp. Cung cấp thư viện bài viết, eBook PDF, khoá học trực tuyến và gói hội viên.
+
+## Pages
+
+- [Trang chủ](/): Giới thiệu tổng quan về dự án và các kinh điển dưỡng sinh.
+- [Thư viện bài viết](/thu-vien): Bài viết Đông y dưỡng sinh theo chuyên mục.
+- [Khoá học](/khoa-hoc): Khoá học trực tuyến về Hoàng Đế Nội Kinh, khí công và dược thiện.
+- [Cửa hàng eBook](/cua-hang): eBook PDF Đông y cao cấp bằng tiếng Việt.
+- [Danh mục sách](/sach): Bộ sưu tập eBook biên dịch và chú giải.
+- [Hội viên](/hoi-vien): Các gói hội viên Học giả và Đại sư.
+- [Giới thiệu](/gioi-thieu): Sứ mệnh và đội ngũ cố vấn Đông y.
+- [Lưu ý y tế](/luu-y-suc-khoe): Cảnh báo và miễn trừ trách nhiệm y tế.
+- [Tài khoản](/tai-khoan): Đăng nhập và đăng ký tài khoản.
+
+## Sách bán chạy
+
+- [Hoàng Đế Nội Kinh Chú Giải](/sach/hoang-de-noi-kinh-chu-giai): eBook 220 trang dịch và chú giải Hoàng Đế Nội Kinh.
+- [21 Bí Kíp Phòng The Cổ Truyền](/sach/21-bi-kip-phong-the-co-truyen): eBook 120 trang về dưỡng sinh phòng the.
+- [Dược Thiện Bổ Thận](/sach/duoc-thien-bo-than): eBook 140 trang với 49 món ăn dưỡng sinh theo mùa.
+
+## Optional
+
+- [Bài viết theo slug](/bai-viet/nguyen-ly-am-duong-trong-doi-song-lua-doi): Ví dụ bài viết chi tiết.

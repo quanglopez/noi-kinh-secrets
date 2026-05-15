@@ -94,6 +94,23 @@ export const Route = createFileRoute("/sach/duoc-thien-bo-than")({
           },
         }),
       },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: [
+            { "@type": "Question", name: "Tôi không biết nấu ăn, có làm theo được không?", acceptedAnswer: { "@type": "Answer", text: "Hoàn toàn được. Mỗi món có hướng dẫn từng bước, định lượng cụ thể bằng gram/muỗng/chén. 7 món khó nhất còn có video." } },
+            { "@type": "Question", name: "Nguyên liệu thuốc Bắc có khó tìm không?", acceptedAnswer: { "@type": "Answer", text: "Tất cả vị thuốc đều có ở chợ thuốc Bắc, siêu thị lớn, hoặc Shopee/Tiki/Lazada." } },
+            { "@type": "Question", name: "Có món cho người ăn chay không?", acceptedAnswer: { "@type": "Answer", text: "Có. Khoảng 20/49 món là chay hoặc có thể biến tấu chay." } },
+            { "@type": "Question", name: "Phụ nữ mang thai có dùng được không?", acceptedAnswer: { "@type": "Answer", text: "Một số món có cảnh báo KHÔNG dùng khi mang thai. Sách ghi rõ ở từng món." } },
+            { "@type": "Question", name: "Con tôi 5 tuổi có ăn được không?", acceptedAnswer: { "@type": "Answer", text: "Khoảng 15 món phù hợp cho trẻ em. Các món có vị thuốc mạnh không nên cho trẻ dưới 12 tuổi." } },
+            { "@type": "Question", name: "Có bản in giấy không?", acceptedAnswer: { "@type": "Answer", text: "Hiện tại chỉ có PDF. Bản in dự kiến Q3/2026." } },
+            { "@type": "Question", name: "Tôi có dị ứng thực phẩm, làm sao biết món nào tránh?", acceptedAnswer: { "@type": "Answer", text: "Mỗi món có mục Lưu ý kiêng kỵ liệt kê đối tượng nên tránh." } },
+            { "@type": "Question", name: "Sách có thay thế bác sĩ không?", acceptedAnswer: { "@type": "Answer", text: "Không. Đây là sách dưỡng sinh ăn uống, không phải sách điều trị bệnh." } },
+          ],
+        }),
+      },
     ],
   }),
   component: SalesPage,

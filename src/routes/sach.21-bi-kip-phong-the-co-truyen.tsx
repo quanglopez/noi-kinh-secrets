@@ -46,13 +46,12 @@ export const Route = createFileRoute("/sach/21-bi-kip-phong-the-co-truyen")({
   head: () => ({
     meta: [
       {
-        title:
-          "21 Bí Kíp Phòng The Cổ Truyền — Dưỡng tinh, cường thận, hoà hợp phu thê",
+        title: "21 Bí Kíp Phòng The Cổ Truyền — eBook Đông y",
       },
       {
         name: "description",
         content:
-          "eBook 120 trang chắt lọc Tố Nữ Kinh, Phòng Trung Thuật & Hoàng Đế Nội Kinh — 21 kỹ thuật dưỡng sinh phòng the, lộ trình 30 ngày, giao file kín đáo. Ưu đãi 149.000đ.",
+          "eBook 120 trang chắt lọc Tố Nữ Kinh & Phòng Trung Thuật — 21 kỹ thuật dưỡng sinh phòng the, lộ trình 30 ngày. Ưu đãi 149.000đ.",
       },
       {
         property: "og:title",
@@ -90,6 +89,23 @@ export const Route = createFileRoute("/sach/21-bi-kip-phong-the-co-truyen")({
             ratingValue: "4.8",
             reviewCount: "142",
           },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: [
+            { "@type": "Question", name: "Tôi đã 55 tuổi, có muộn không?", acceptedAnswer: { "@type": "Answer", text: "Không. Phần Lộ trình theo độ tuổi có chỉ dẫn riêng cho nhóm 50–70 tuổi." } },
+            { "@type": "Question", name: "Sách dành cho nam hay nữ?", acceptedAnswer: { "@type": "Answer", text: "Cả hai. Khoảng 70% nội dung trung tính cho cả nam và nữ. 30% có phần riêng cho từng giới." } },
+            { "@type": "Question", name: "Tôi đang dùng Viagra/Cialis, có dùng được không?", acceptedAnswer: { "@type": "Answer", text: "Có thể dùng song song, nhưng nên giảm dần thuốc khi cơ thể phục hồi tự nhiên." } },
+            { "@type": "Question", name: "Bài thuốc có khó tìm nguyên liệu không?", acceptedAnswer: { "@type": "Answer", text: "Tất cả nguyên liệu đều có ở chợ thuốc Bắc, siêu thị lớn, hoặc Shopee." } },
+            { "@type": "Question", name: "Có cần dùng đều cả 21 bí kíp không?", acceptedAnswer: { "@type": "Answer", text: "Không. Sách hướng dẫn chọn 5–7 bí kíp phù hợp với thể trạng." } },
+            { "@type": "Question", name: "Thanh toán có kín đáo không?", acceptedAnswer: { "@type": "Answer", text: "Có. Hoá đơn chỉ hiện HoangDeNoiKinh - Sách điện tử, không hiện tên chi tiết." } },
+            { "@type": "Question", name: "Vợ/chồng tôi đọc cùng được không?", acceptedAnswer: { "@type": "Answer", text: "Rất khuyến khích. Phần Hoà hợp phu thê được viết với giả định cả hai cùng đọc." } },
+            { "@type": "Question", name: "Có bản in giấy không?", acceptedAnswer: { "@type": "Answer", text: "Hiện chỉ có bản PDF. Bản in dự kiến Q4/2026." } },
+          ],
         }),
       },
     ],
