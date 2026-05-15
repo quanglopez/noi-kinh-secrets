@@ -84,6 +84,11 @@ export const Route = createFileRoute("/bai-viet/$slug")({
             datePublished: loaderData.article.publishedAt,
             articleSection: loaderData.article.category,
             mainEntityOfPage: url,
+            author: {
+              "@type": "Organization",
+              name: "Hoàng Đế Nội Kinh",
+              url: "https://hoang-de-noi-kinh.lovable.app/",
+            },
             publisher: {
               "@type": "Organization",
               name: "Hoàng Đế Nội Kinh",
