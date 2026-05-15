@@ -49,8 +49,7 @@ export const Route = createFileRoute("/sach/duoc-thien-bo-than")({
   head: () => ({
     meta: [
       {
-        title:
-          "Dược Thiện Bổ Thận — 49 Món Ăn Dưỡng Sinh Theo Mùa | Hoàng Đế Nội Kinh",
+         title: "Dược Thiện Bổ Thận: 49 Món Ăn – Bài Thuốc Dưỡng Sinh Theo Mùa | Hoàng Đế Nội Kinh",
       },
       {
         name: "description",
@@ -77,7 +76,7 @@ export const Route = createFileRoute("/sach/duoc-thien-bo-than")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Product",
-          name: "Dược Thiện Bổ Thận — 49 Món Ăn Dưỡng Sinh Theo Mùa",
+           name: "Dược Thiện Bổ Thận: 49 Món Ăn – Bài Thuốc Dưỡng Sinh Theo Mùa",
           description:
             "eBook 140 trang về dược thiện cổ truyền: 49 món ăn — bài thuốc theo 4 mùa, nguyên liệu chợ Việt.",
           brand: { "@type": "Brand", name: "Hoàng Đế Nội Kinh" },
@@ -199,11 +198,11 @@ function Hero() {
               className="absolute inset-0 -z-10 translate-x-6 translate-y-6 bg-gold/30 rounded-sm"
               aria-hidden
             />
-            <img
-              src={coverImg}
-              alt="Bìa sách Dược Thiện Bổ Thận — 49 Món Ăn Dưỡng Sinh Theo Mùa"
-              className="w-[260px] md:w-[340px] lg:w-[380px] h-auto rounded-sm shadow-2xl rotate-[-4deg] hover:rotate-0 transition-transform duration-700"
-            />
+             <img
+               src={coverImg}
+               alt="Bìa sách Dược Thiện Bổ Thận: 49 Món Ăn – Bài Thuốc Dưỡng Sinh Theo Mùa"
+               className="w-[260px] md:w-[340px] lg:w-[380px] h-auto rounded-sm shadow-2xl rotate-[-4deg] hover:rotate-0 transition-transform duration-700"
+             />
             <span
               className="seal absolute -top-6 -right-6 text-base"
               aria-hidden
