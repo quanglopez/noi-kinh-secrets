@@ -7,6 +7,7 @@ import { products, formatVND } from "@/lib/seed-data";
 
 const SALES_PAGES: Record<string, string> = {
   "ebook-noi-kinh": "/sach/hoang-de-noi-kinh-chu-giai",
+  "ebook-khi-cong": "/sach/21-bi-kip-phong-the-co-truyen",
 };
 
 export const Route = createFileRoute("/sach/")({
