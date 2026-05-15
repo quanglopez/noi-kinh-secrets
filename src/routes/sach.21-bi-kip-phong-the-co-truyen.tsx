@@ -38,7 +38,7 @@ import qrPaymentImg from "@/assets/qr-payment-mb.png";
 
 const PAGE_URL =
   "https://hoang-de-noi-kinh.lovable.app/sach/21-bi-kip-phong-the-co-truyen";
-const PRICE_NOW = 99_000;
+const PRICE_NOW = 149_000;
 const PRICE_FULL = 149_000;
 const TOTAL_VALUE = 446_000;
 
@@ -52,7 +52,7 @@ export const Route = createFileRoute("/sach/21-bi-kip-phong-the-co-truyen")({
       {
         name: "description",
         content:
-          "eBook 120 trang chắt lọc Tố Nữ Kinh, Phòng Trung Thuật & Hoàng Đế Nội Kinh — 21 kỹ thuật dưỡng sinh phòng the, lộ trình 30 ngày, giao file kín đáo. Ưu đãi 99.000đ.",
+          "eBook 120 trang chắt lọc Tố Nữ Kinh, Phòng Trung Thuật & Hoàng Đế Nội Kinh — 21 kỹ thuật dưỡng sinh phòng the, lộ trình 30 ngày, giao file kín đáo. Ưu đãi 149.000đ.",
       },
       {
         property: "og:title",
@@ -61,7 +61,7 @@ export const Route = createFileRoute("/sach/21-bi-kip-phong-the-co-truyen")({
       {
         property: "og:description",
         content:
-          "Dưỡng tinh – Cường thận – Hoà hợp phu thê. 21 kỹ thuật cổ truyền + 3 bonus. Chỉ 99.000đ trong 7 ngày đầu.",
+          "Dưỡng tinh – Cường thận – Hoà hợp phu thê. 21 kỹ thuật cổ truyền + 3 bonus. Chỉ 149.000đ trong 7 ngày đầu.",
       },
       { property: "og:url", content: PAGE_URL },
       { property: "og:type", content: "product" },
