@@ -61,7 +61,7 @@ const COMMON_FAQ = [
 const PREVIEWS: Record<string, PreviewMeta> = {
   "ebook-noi-kinh": {
     format: "PDF",
-    pages: 480,
+    pages: 75,
     size: "28 MB",
     toc: [
       "Chương 1 — Thượng Cổ Thiên Chân Luận",
@@ -82,7 +82,7 @@ const PREVIEWS: Record<string, PreviewMeta> = {
   },
   "ebook-21-bi-kip": {
     format: "PDF",
-    pages: 168,
+    pages: 75,
     size: "14 MB",
     toc: [
       "Chương 1 — Nguyên lý Phòng Trung Thuật",
@@ -103,7 +103,7 @@ const PREVIEWS: Record<string, PreviewMeta> = {
   },
   "ebook-duoc-thien": {
     format: "PDF",
-    pages: 140,
+    pages: 75,
     size: "22 MB",
     toc: [
       "Chương 1 — Triết lý dược thiện theo Hoàng Đế Nội Kinh",
