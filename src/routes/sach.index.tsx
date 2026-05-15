@@ -36,6 +36,20 @@ export const Route = createFileRoute("/sach/")({
 function SachIndexPage() {
   return (
     <SiteLayout>
+      <section className="px-6 pt-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="relative w-full overflow-hidden rounded-sm border border-border bg-ink shadow-2xl aspect-video">
+            <iframe
+              src="https://3ba72ae7-9d1e-4e5e-80b5-11ed7b6b8e30-00-1tsklff6164d6.pike.replit.dev/video-ads"
+              title="Video giới thiệu sách Hoàng Đế Nội Kinh"
+              loading="lazy"
+              allow="autoplay; fullscreen"
+              className="absolute inset-0 h-full w-full border-0"
+            />
+          </div>
+        </div>
+      </section>
+
       <section className="py-16 px-6 border-b border-border bg-card/30">
         <div className="mx-auto max-w-7xl">
           <p className="text-xs uppercase tracking-[0.4em] text-imperial mb-4">
