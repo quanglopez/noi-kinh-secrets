@@ -22,6 +22,7 @@ export function SiteFooter() {
           <ul className="space-y-2 text-sm text-parchment/70">
             <li><Link to="/thu-vien" className="hover:text-gold">Thư viện bài viết</Link></li>
             <li><Link to="/khoa-hoc" className="hover:text-gold">Khoá học</Link></li>
+            <li><Link to="/sach" className="hover:text-gold">Danh mục sách</Link></li>
             <li><Link to="/cua-hang" className="hover:text-gold">Cửa hàng eBook</Link></li>
             <li><Link to="/hoi-vien" className="hover:text-gold">Gói thành viên</Link></li>
           </ul>
