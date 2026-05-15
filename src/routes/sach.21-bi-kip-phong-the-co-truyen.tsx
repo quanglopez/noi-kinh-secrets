@@ -39,8 +39,8 @@ import qrPaymentImg from "@/assets/qr-payment-mb.png";
 const PAGE_URL =
   "https://hoang-de-noi-kinh.lovable.app/sach/21-bi-kip-phong-the-co-truyen";
 const PRICE_NOW = 149_000;
-const PRICE_FULL = 149_000;
-const TOTAL_VALUE = 446_000;
+const PRICE_FULL = 299_000;
+const TOTAL_VALUE = 596_000;
 
 export const Route = createFileRoute("/sach/21-bi-kip-phong-the-co-truyen")({
   head: () => ({
