@@ -8,6 +8,7 @@ const nav = [
   { to: "/", label: "Trang chủ" },
   { to: "/thu-vien", label: "Thư viện" },
   { to: "/khoa-hoc", label: "Khoá học" },
+  { to: "/sach", label: "Sách" },
   { to: "/cua-hang", label: "Cửa hàng" },
   { to: "/hoi-vien", label: "Hội viên" },
   { to: "/gioi-thieu", label: "Giới thiệu" },
