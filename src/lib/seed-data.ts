@@ -139,7 +139,7 @@ export const products: Product[] = [
     id: "ebook-noi-kinh",
     title: "Hoàng Đế Nội Kinh chú giải — trọn bộ",
     description: "Bản dịch và chú giải đầy đủ Tố Vấn và Linh Khu, kèm minh hoạ kinh mạch và bảng tra cứu thuật ngữ. 480 trang PDF chất lượng cao.",
-    price: 499000,
+     price: 149000,
     type: "ebook",
     cover: ebook1,
     rating: 4.9,
