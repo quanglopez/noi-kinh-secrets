@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, BookOpen, Sparkles, HeartHandshake, Wind, Leaf, Lock, Check, Quote } from "lucide-react";
+import { ArrowRight, BookOpen, Sparkles, HeartHandshake, Wind, Leaf, Lock, Check, Quote, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -140,6 +140,35 @@ function HomePage() {
             </div>
           </div>
         </div>
+        {/* Scroll hint */}
+        <a
+          href="#stats"
+          aria-label="Cuộn xuống để khám phá"
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-imperial/80 hover:text-imperial transition-colors animate-bounce"
+        >
+          <span className="text-[10px] uppercase tracking-[0.4em]">Cuộn xuống để khám phá</span>
+          <ChevronDown className="h-5 w-5" strokeWidth={1.5} />
+        </a>
+      </section>
+
+      {/* QUICK STATS BAR */}
+      <section id="stats" className="border-b border-border bg-card/40">
+        <div className="mx-auto max-w-6xl px-6 py-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm md:text-base">
+          {[
+            { value: "100+", label: "bài viết" },
+            { value: "3", label: "chuyên gia" },
+            { value: "500+", label: "học viên" },
+            { value: "4.000 năm", label: "trí tuệ" },
+          ].map((s, i) => (
+            <div key={s.label} className="flex items-center gap-8">
+              {i > 0 && <span className="text-gold/60 select-none" aria-hidden>·</span>}
+              <div className="flex items-baseline gap-2">
+                <span className="font-serif text-xl md:text-2xl text-imperial">{s.value}</span>
+                <span className="text-xs md:text-sm uppercase tracking-wider text-muted-foreground">{s.label}</span>
+              </div>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* TINH HOA 4000 NĂM */}
@@ -269,6 +298,58 @@ function HomePage() {
                 </Link>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURED HORIZONTAL ARTICLES */}
+      <section className="py-24 px-6 border-t border-border">
+        <div className="mx-auto max-w-5xl">
+          <div className="flex items-end justify-between flex-wrap gap-4 mb-12">
+            <div>
+              <p className="text-xs uppercase tracking-[0.4em] text-imperial mb-4">Đọc tiếp</p>
+              <h2 className="font-serif text-4xl md:text-5xl">Bài viết nổi bật</h2>
+            </div>
+            <Link to="/thu-vien" className="text-sm text-imperial hover:underline flex items-center gap-1">
+              Xem toàn bộ thư viện <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="space-y-6">
+            {articles.slice(0, 3).map((a) => (
+              <Link
+                key={a.slug}
+                to="/bai-viet/$slug"
+                params={{ slug: a.slug }}
+                className="group ink-card rounded-sm overflow-hidden grid sm:grid-cols-[240px_1fr] items-stretch hover:bg-card/60 transition-colors"
+              >
+                <div className="aspect-[16/10] sm:aspect-auto overflow-hidden">
+                  <img
+                    src={a.thumbnail}
+                    alt={a.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+                <div className="p-6 flex flex-col justify-center">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="text-[10px] uppercase tracking-[0.3em] text-gold">{a.category}</span>
+                    <span className="text-muted-foreground/50 text-xs">·</span>
+                    <span className="text-xs text-muted-foreground">{a.readingTime}</span>
+                  </div>
+                  <h3 className="font-serif text-2xl mb-3 group-hover:text-imperial transition-colors">
+                    {a.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">{a.excerpt}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <Link to="/thu-vien">
+              <Button variant="outline" className="rounded-sm px-8">
+                Xem toàn bộ thư viện <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
