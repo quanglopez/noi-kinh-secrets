@@ -302,6 +302,58 @@ function HomePage() {
         </div>
       </section>
 
+      {/* FEATURED HORIZONTAL ARTICLES */}
+      <section className="py-24 px-6 border-t border-border">
+        <div className="mx-auto max-w-5xl">
+          <div className="flex items-end justify-between flex-wrap gap-4 mb-12">
+            <div>
+              <p className="text-xs uppercase tracking-[0.4em] text-imperial mb-4">Đọc tiếp</p>
+              <h2 className="font-serif text-4xl md:text-5xl">Bài viết nổi bật</h2>
+            </div>
+            <Link to="/thu-vien" className="text-sm text-imperial hover:underline flex items-center gap-1">
+              Xem toàn bộ thư viện <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="space-y-6">
+            {articles.slice(0, 3).map((a) => (
+              <Link
+                key={a.slug}
+                to="/bai-viet/$slug"
+                params={{ slug: a.slug }}
+                className="group ink-card rounded-sm overflow-hidden grid sm:grid-cols-[240px_1fr] items-stretch hover:bg-card/60 transition-colors"
+              >
+                <div className="aspect-[16/10] sm:aspect-auto overflow-hidden">
+                  <img
+                    src={a.thumbnail}
+                    alt={a.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+                <div className="p-6 flex flex-col justify-center">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="text-[10px] uppercase tracking-[0.3em] text-gold">{a.category}</span>
+                    <span className="text-muted-foreground/50 text-xs">·</span>
+                    <span className="text-xs text-muted-foreground">{a.readingTime}</span>
+                  </div>
+                  <h3 className="font-serif text-2xl mb-3 group-hover:text-imperial transition-colors">
+                    {a.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">{a.excerpt}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <Link to="/thu-vien">
+              <Button variant="outline" className="rounded-sm px-8">
+                Xem toàn bộ thư viện <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* TESTIMONIALS */}
       <section className="py-24 px-6">
         <div className="mx-auto max-w-7xl">
