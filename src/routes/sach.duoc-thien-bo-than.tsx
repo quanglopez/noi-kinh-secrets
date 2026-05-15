@@ -42,7 +42,7 @@ import qrPaymentImg from "@/assets/qr-payment-mb.png";
 const PAGE_URL =
   "https://hoang-de-noi-kinh.lovable.app/sach/duoc-thien-bo-than";
 const PRICE_NOW = 149_000;
-const PRICE_FULL = 199_000;
+ const PRICE_FULL = 149_000;
 const TOTAL_VALUE = 496_000;
 
 export const Route = createFileRoute("/sach/duoc-thien-bo-than")({
