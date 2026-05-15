@@ -11,6 +11,8 @@ export const Route = createFileRoute("/cua-hang")({
       { name: "description", content: "Cửa hàng eBook Đông y dưỡng sinh: Hoàng Đế Nội Kinh chú giải, Khí công phòng the, Dược thiện bổ thận." },
       { property: "og:title", content: "Cửa hàng eBook — Hoàng Đế Nội Kinh" },
       { property: "og:description", content: "eBook PDF Đông y cao cấp bằng tiếng Việt." },
+      { property: "og:url", content: "https://hoang-de-noi-kinh.lovable.app/cua-hang" },
+      { property: "og:type", content: "website" },
     ],
     links: [{ rel: "canonical", href: "/cua-hang" }],
   }),
