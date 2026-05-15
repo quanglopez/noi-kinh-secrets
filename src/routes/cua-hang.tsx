@@ -46,29 +46,40 @@ function ShopPage() {
                 <span className="font-serif text-2xl text-imperial">{formatVND(p.price)}</span>
               </div>
               <div className="flex gap-2">
-                {p.id === "ebook-noi-kinh" ? (
-                  <>
-                    <Link to="/sach/hoang-de-noi-kinh-chu-giai" className="flex-1">
-                      <Button className="w-full bg-imperial hover:bg-imperial/90 text-primary-foreground rounded-sm">
+                {(() => {
+                  const sales =
+                    p.id === "ebook-noi-kinh"
+                      ? "/sach/hoang-de-noi-kinh-chu-giai"
+                      : p.id === "ebook-khi-cong"
+                        ? "/sach/21-bi-kip-phong-the-co-truyen"
+                        : null;
+                  if (sales) {
+                    return (
+                      <>
+                        <Link to={sales} className="flex-1">
+                          <Button className="w-full bg-imperial hover:bg-imperial/90 text-primary-foreground rounded-sm">
+                            <ShoppingCart className="h-4 w-4 mr-2" /> Mua ngay
+                          </Button>
+                        </Link>
+                        <Link to={sales}>
+                          <Button variant="outline" className="rounded-sm">
+                            <Eye className="h-4 w-4 mr-2" /> Xem trước
+                          </Button>
+                        </Link>
+                      </>
+                    );
+                  }
+                  return (
+                    <>
+                      <Button className="flex-1 bg-imperial hover:bg-imperial/90 text-primary-foreground rounded-sm">
                         <ShoppingCart className="h-4 w-4 mr-2" /> Mua ngay
                       </Button>
-                    </Link>
-                    <Link to="/sach/hoang-de-noi-kinh-chu-giai">
                       <Button variant="outline" className="rounded-sm">
                         <Eye className="h-4 w-4 mr-2" /> Xem trước
                       </Button>
-                    </Link>
-                  </>
-                ) : (
-                  <>
-                    <Button className="flex-1 bg-imperial hover:bg-imperial/90 text-primary-foreground rounded-sm">
-                      <ShoppingCart className="h-4 w-4 mr-2" /> Mua ngay
-                    </Button>
-                    <Button variant="outline" className="rounded-sm">
-                      <Eye className="h-4 w-4 mr-2" /> Xem trước
-                    </Button>
-                  </>
-                )}
+                    </>
+                  );
+                })()}
               </div>
             </article>
           ))}
