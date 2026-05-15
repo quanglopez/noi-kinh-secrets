@@ -54,7 +54,7 @@ export const Route = createFileRoute("/sach/duoc-thien-bo-than")({
       {
         name: "description",
         content:
-          "eBook 140 trang, 49 món ăn — bài thuốc dưỡng sinh theo 4 mùa, nguyên liệu chợ Việt, làm tại nhà. Áp dụng Hoàng Đế Nội Kinh: ngũ hành – ngũ tạng – ngũ vị. Chỉ 149.000đ.",
+          "eBook 75 trang, 49 món ăn — bài thuốc dưỡng sinh theo 4 mùa, nguyên liệu chợ Việt, làm tại nhà. Áp dụng Hoàng Đế Nội Kinh: ngũ hành – ngũ tạng – ngũ vị. Chỉ 149.000đ.",
       },
       {
         property: "og:title",
@@ -78,7 +78,7 @@ export const Route = createFileRoute("/sach/duoc-thien-bo-than")({
           "@type": "Product",
            name: "Dược Thiện Bổ Thận: 49 Món Ăn – Bài Thuốc Dưỡng Sinh Theo Mùa",
           description:
-            "eBook 140 trang về dược thiện cổ truyền: 49 món ăn — bài thuốc theo 4 mùa, nguyên liệu chợ Việt.",
+            "eBook 75 trang về dược thiện cổ truyền: 49 món ăn — bài thuốc theo 4 mùa, nguyên liệu chợ Việt.",
           brand: { "@type": "Brand", name: "Hoàng Đế Nội Kinh" },
           offers: {
             "@type": "Offer",
@@ -458,7 +458,7 @@ function Contents() {
     <section className="py-20 md:py-28 px-6 border-b border-border">
       <div className="mx-auto max-w-4xl">
         <p className="text-xs uppercase tracking-[0.4em] text-imperial mb-4">
-          Bên trong 140 trang
+          Bên trong 75 trang
         </p>
         <h2 className="font-serif text-3xl md:text-5xl leading-tight mb-10">
           49 món — chia theo 4 mùa
@@ -751,7 +751,7 @@ function CountdownDigit({ value, label }: { value: number; label: string }) {
 function OfferSection() {
   const { days, hours, minutes, seconds, ready } = useCountdown();
   const lines: { label: string; value: string }[] = [
-    { label: "eBook 140 trang · 49 món dược thiện 4 mùa", value: formatVnd(199_000) },
+    { label: "eBook 75 trang · 49 món dược thiện 4 mùa", value: formatVnd(199_000) },
     { label: "Bonus #1 · Bộ 49 Thẻ Công Thức", value: formatVnd(99_000) },
     { label: "Bonus #2 · Danh Sách Mua Sắm 12 Tháng", value: formatVnd(99_000) },
     { label: "Bonus #3 · Video 7 Món \"Khó\"", value: formatVnd(99_000) },
