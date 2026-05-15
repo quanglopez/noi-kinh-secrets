@@ -157,7 +157,7 @@ export const products: Product[] = [
   },
   {
     id: "ebook-duoc-thien",
-    title: "Thực đơn dược thiện bổ thận 30 ngày",
+    title: "Dược Thiện Bổ Thận — 49 Món Ăn Dưỡng Sinh Theo Mùa",
     description: "eBook 140 trang, 49 món ăn — bài thuốc theo 4 mùa, nguyên liệu chợ Việt, làm tại nhà. Áp dụng nguyên lý Hoàng Đế Nội Kinh.",
     price: 149000,
     type: "ebook",
