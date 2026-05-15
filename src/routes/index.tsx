@@ -6,6 +6,10 @@ import { Input } from "@/components/ui/input";
 import { SiteLayout } from "@/components/site/layout";
 import { articles, formatVND } from "@/lib/seed-data";
 import heroImg from "@/assets/hero-inkwash.jpg";
+import testimonialLan from "@/assets/testimonial-lan.jpg";
+import testimonialTuan from "@/assets/testimonial-tuan.jpg";
+import testimonialHoa from "@/assets/testimonial-hoa.jpg";
+import { Star } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -66,9 +70,30 @@ const tiers = [
 ];
 
 const testimonials = [
-  { name: "Anh Tuấn, 42 tuổi", role: "Doanh nhân, Hà Nội", quote: "Sau 3 tháng theo chương trình khí công và dược thiện, tôi cảm thấy sinh lực hồi phục rõ rệt. Cách trình bày học thuật, tao nhã rất phù hợp." },
-  { name: "Chị Lan, 38 tuổi", role: "Giáo viên Yoga, TP.HCM", quote: "Đây là nguồn tư liệu tiếng Việt hiếm hoi về Đông y dưỡng sinh được trình bày nghiêm túc và đẹp. Tôi giới thiệu cho rất nhiều học viên." },
-  { name: "Bác Minh, 65 tuổi", role: "Nghệ nhân thư pháp", quote: "Bản dịch Hoàng Đế Nội Kinh trên đây là một trong những bản tốt nhất tôi từng đọc bằng tiếng Việt. Trân trọng cảm ơn đội ngũ." },
+  {
+    name: "Nguyễn Thị Lan, 42 tuổi, Hà Nội",
+    avatar: testimonialLan,
+    rating: 5,
+    quote:
+      "Sau ba tháng kiên trì theo dược thiện, chứng mất ngủ và đau lưng âm ỉ của tôi đã giảm rõ rệt. Sách viết rành mạch, dễ áp dụng cho người nội trợ.",
+    product: "Dược Thiện Bổ Thận — 49 Món Ăn Dưỡng Sinh",
+  },
+  {
+    name: "Trần Văn Tuấn, 48 tuổi, TP.HCM",
+    avatar: testimonialTuan,
+    rating: 5,
+    quote:
+      "Khí công phòng the giúp vợ chồng tôi gần gũi và hiểu nhau hơn. Sinh lực hồi phục, tinh thần thư thái — điều mà thuốc bổ trước đây chưa từng mang lại.",
+    product: "21 Bí Kíp Phòng The Cổ Truyền",
+  },
+  {
+    name: "Lê Thị Hoa, 55 tuổi, Huế",
+    avatar: testimonialHoa,
+    rating: 5,
+    quote:
+      "Bản chú giải Hoàng Đế Nội Kinh giúp tôi hiểu cơ thể mình theo cách hoàn toàn mới. Mỗi chương là một bài học sống — không phải lý thuyết suông.",
+    product: "Hoàng Đế Nội Kinh chú giải",
+  },
 ];
 
 function HomePage() {
@@ -253,16 +278,40 @@ function HomePage() {
         <div className="mx-auto max-w-7xl">
           <div className="text-center mb-16">
             <p className="text-xs uppercase tracking-[0.4em] text-imperial mb-4">Cảm nhận</p>
-            <h2 className="font-serif text-4xl md:text-5xl">Học giả nói gì</h2>
+            <h2 className="font-serif text-4xl md:text-5xl">Học viên nói gì về chúng tôi</h2>
           </div>
           <div className="grid gap-6 md:grid-cols-3">
             {testimonials.map((t) => (
-              <figure key={t.name} className="ink-card rounded-sm p-8">
-                <Quote className="h-8 w-8 text-imperial mb-4" strokeWidth={1} />
-                <blockquote className="font-serif text-lg italic leading-relaxed mb-6">"{t.quote}"</blockquote>
-                <figcaption className="border-t border-border pt-4">
-                  <div className="font-medium">{t.name}</div>
-                  <div className="text-xs text-muted-foreground">{t.role}</div>
+              <figure key={t.name} className="ink-card rounded-sm p-8 flex flex-col">
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="h-14 w-14 rounded-full overflow-hidden ring-2 ring-gold/60 shrink-0">
+                    <img
+                      src={t.avatar}
+                      alt={`Ảnh ${t.name}`}
+                      width={112}
+                      height={112}
+                      loading="lazy"
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="font-medium truncate">{t.name}</div>
+                    <div className="flex items-center gap-0.5 mt-1">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star
+                          key={i}
+                          className={`h-3.5 w-3.5 ${i < t.rating ? "fill-gold text-gold" : "text-muted"}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <Quote className="h-6 w-6 text-imperial mb-3" strokeWidth={1} />
+                <blockquote className="font-serif text-base italic leading-relaxed mb-6 flex-1">
+                  “{t.quote}”
+                </blockquote>
+                <figcaption className="border-t border-border pt-4 text-xs uppercase tracking-wider text-gold">
+                  Đã mua: {t.product}
                 </figcaption>
               </figure>
             ))}

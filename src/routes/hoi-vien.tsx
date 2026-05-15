@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Check, X } from "lucide-react";
+import { Check, X, Quote, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SiteLayout } from "@/components/site/layout";
 import { formatVND } from "@/lib/seed-data";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import testimonialQuang from "@/assets/testimonial-quang.jpg";
 
 export const Route = createFileRoute("/hoi-vien")({
   head: () => ({
@@ -47,6 +48,41 @@ function MembershipPage() {
         </div>
       </section>
       <section className="py-16 px-6">
+        <div className="mx-auto max-w-4xl mb-16">
+          <figure className="ink-card rounded-sm p-8 md:p-12 relative">
+            <Quote className="absolute top-6 left-6 h-10 w-10 text-imperial/20" strokeWidth={1} />
+            <div className="flex flex-col md:flex-row items-center gap-8">
+              <div className="h-28 w-28 rounded-full overflow-hidden ring-2 ring-gold/60 ring-offset-4 ring-offset-card shrink-0">
+                <img
+                  src={testimonialQuang}
+                  alt="Ảnh học viên Phạm Quang"
+                  width={224}
+                  height={224}
+                  loading="lazy"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <div className="text-center md:text-left">
+                <div className="flex items-center justify-center md:justify-start gap-0.5 mb-3">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-gold text-gold" />
+                  ))}
+                </div>
+                <blockquote className="font-serif text-xl md:text-2xl italic leading-relaxed mb-4">
+                  “Là hội viên Đại sư đã hơn một năm, tôi nhận được giá trị vượt xa giá trị một tách trà mỗi tuần.
+                  Tư vấn 1:1 với lương y giúp tôi điều chỉnh dược thiện đúng thể trạng — sức khoẻ ổn định, vợ chồng
+                  hoà hợp, tinh thần minh mẫn.”
+                </blockquote>
+                <figcaption className="text-sm">
+                  <span className="font-medium">Phạm Quang, 60 tuổi, Đà Nẵng</span>
+                  <span className="block text-xs uppercase tracking-wider text-gold mt-1">
+                    Hội viên gói Đại sư
+                  </span>
+                </figcaption>
+              </div>
+            </div>
+          </figure>
+        </div>
         <div className="mx-auto max-w-6xl overflow-x-auto">
           <table className="w-full border-collapse min-w-[640px]">
             <thead>
