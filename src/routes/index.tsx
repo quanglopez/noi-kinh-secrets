@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { SITE_URL } from "@/lib/site-config";
 import { ArrowRight, BookOpen, Sparkles, HeartHandshake, Wind, Leaf, Lock, Check, Quote, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -19,9 +20,9 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Hoàng Đế Nội Kinh — Bí Kíp Dưỡng Sinh" },
       { property: "og:description", content: "Trí tuệ ngàn năm về sức khoẻ và hạnh phúc lứa đôi." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://hoang-de-noi-kinh.lovable.app/" },
+      { property: "og:url", content: "https://noi-kinh-secrets.replit.app/" },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
     scripts: [
       {
         type: "application/ld+json",
@@ -29,11 +30,11 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@type": "WebSite",
           name: "Hoàng Đế Nội Kinh — Bí Kíp Dưỡng Sinh",
-          url: "https://hoang-de-noi-kinh.lovable.app/",
+          url: "https://noi-kinh-secrets.replit.app/",
           inLanguage: "vi-VN",
           potentialAction: {
             "@type": "SearchAction",
-            target: "https://hoang-de-noi-kinh.lovable.app/thu-vien?q={search_term_string}",
+            target: "https://noi-kinh-secrets.replit.app/thu-vien?q={search_term_string}",
             "query-input": "required name=search_term_string",
           },
         }),
@@ -44,8 +45,8 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@type": "Organization",
           name: "Hoàng Đế Nội Kinh",
-          url: "https://hoang-de-noi-kinh.lovable.app/",
-          logo: "https://hoang-de-noi-kinh.lovable.app/og-image.png",
+          url: "https://noi-kinh-secrets.replit.app/",
+          logo: "https://noi-kinh-secrets.replit.app/og-image.png",
           description: "Dự án phổ biến tri thức Đông y dưỡng sinh cổ truyền bằng tiếng Việt hiện đại.",
         }),
       },

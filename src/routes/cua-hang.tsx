@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { SITE_URL } from "@/lib/site-config";
 import { Star, Eye, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SiteLayout } from "@/components/site/layout";
@@ -11,10 +12,10 @@ export const Route = createFileRoute("/cua-hang")({
       { name: "description", content: "Cửa hàng eBook Đông y dưỡng sinh: Hoàng Đế Nội Kinh chú giải, Khí công phòng the, Dược thiện bổ thận." },
       { property: "og:title", content: "Cửa hàng eBook — Hoàng Đế Nội Kinh" },
       { property: "og:description", content: "eBook PDF Đông y cao cấp bằng tiếng Việt." },
-      { property: "og:url", content: "https://hoang-de-noi-kinh.lovable.app/cua-hang" },
+      { property: "og:url", content: "https://noi-kinh-secrets.replit.app/cua-hang" },
       { property: "og:type", content: "website" },
     ],
-    links: [{ rel: "canonical", href: "/cua-hang" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/cua-hang` }],
   }),
   component: ShopPage,
 });

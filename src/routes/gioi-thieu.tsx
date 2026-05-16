@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SITE_URL } from "@/lib/site-config";
 import { SiteLayout } from "@/components/site/layout";
 import { Sparkles, Users, Award, HeartHandshake } from "lucide-react";
 import advisorMinh from "@/assets/advisor-minh.jpg";
@@ -13,7 +14,7 @@ export const Route = createFileRoute("/gioi-thieu")({
       { property: "og:title", content: "Giới thiệu — Hoàng Đế Nội Kinh" },
       { property: "og:description", content: "Sứ mệnh và đội ngũ cố vấn Đông y." },
     ],
-    links: [{ rel: "canonical", href: "/gioi-thieu" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/gioi-thieu` }],
   }),
   component: AboutPage,
 });

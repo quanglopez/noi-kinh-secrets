@@ -83,11 +83,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:site", content: "@HoangDeNoiKinh" },
       { name: "twitter:title", content: "Hoàng Đế Nội Kinh — Bí Kíp Dưỡng Sinh" },
       { name: "twitter:description", content: "Trí tuệ ngàn năm về sức khoẻ, sinh lực và hạnh phúc lứa đôi từ kinh điển Đông y." },
-      { property: "og:image", content: "https://hoang-de-noi-kinh.lovable.app/og-image.png" },
+      { property: "og:image", content: "https://noi-kinh-secrets.replit.app/og-image.png" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       { property: "og:image:alt", content: "Hoàng Đế Nội Kinh — Minh triết dưỡng sinh Đông phương" },
-      { name: "twitter:image", content: "https://hoang-de-noi-kinh.lovable.app/og-image.png" },
+      { name: "twitter:image", content: "https://noi-kinh-secrets.replit.app/og-image.png" },
     ],
     links: [
       {

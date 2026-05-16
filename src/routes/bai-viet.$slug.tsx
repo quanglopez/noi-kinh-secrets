@@ -15,10 +15,10 @@ export const Route = createFileRoute("/bai-viet/$slug")({
   },
   head: ({ loaderData, params }) => {
     if (!loaderData) return { meta: [], links: [] };
-    const url = `https://hoang-de-noi-kinh.lovable.app/bai-viet/${params.slug}`;
+    const url = `https://noi-kinh-secrets.replit.app/bai-viet/${params.slug}`;
     const image = loaderData.article.thumbnail?.startsWith("http")
       ? loaderData.article.thumbnail
-      : `https://hoang-de-noi-kinh.lovable.app${loaderData.article.thumbnail}`;
+      : `https://noi-kinh-secrets.replit.app${loaderData.article.thumbnail}`;
     const title = `${loaderData.article.title} — Hoàng Đế Nội Kinh`;
     const description = loaderData.article.excerpt;
     return {
@@ -50,19 +50,19 @@ export const Route = createFileRoute("/bai-viet/$slug")({
                 "@type": "ListItem",
                 position: 1,
                 name: "Trang chủ",
-                item: "https://hoang-de-noi-kinh.lovable.app/",
+                item: "https://noi-kinh-secrets.replit.app/",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Thư viện",
-                item: "https://hoang-de-noi-kinh.lovable.app/thu-vien",
+                item: "https://noi-kinh-secrets.replit.app/thu-vien",
               },
               {
                 "@type": "ListItem",
                 position: 3,
                 name: loaderData.article.category,
-                item: `https://hoang-de-noi-kinh.lovable.app/thu-vien?cat=${encodeURIComponent(loaderData.article.category)}`,
+                item: `https://noi-kinh-secrets.replit.app/thu-vien?cat=${encodeURIComponent(loaderData.article.category)}`,
               },
               {
                 "@type": "ListItem",
@@ -87,7 +87,7 @@ export const Route = createFileRoute("/bai-viet/$slug")({
             author: {
               "@type": "Organization",
               name: "Hoàng Đế Nội Kinh",
-              url: "https://hoang-de-noi-kinh.lovable.app/",
+              url: "https://noi-kinh-secrets.replit.app/",
             },
             publisher: {
               "@type": "Organization",

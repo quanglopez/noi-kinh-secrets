@@ -1,4 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { SITE_URL } from "@/lib/site-config";
 import { Mail, Lock } from "lucide-react";
 import { useEffect, useState, type FormEvent } from "react";
 import { toast } from "sonner";
@@ -15,7 +16,7 @@ export const Route = createFileRoute("/tai-khoan")({
       { title: "Tài khoản — Hoàng Đế Nội Kinh" },
       { name: "description", content: "Đăng nhập hoặc đăng ký để truy cập thư viện hội viên." },
     ],
-    links: [{ rel: "canonical", href: "/tai-khoan" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/tai-khoan` }],
   }),
   component: AccountPage,
 });

@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { SITE_URL } from "@/lib/site-config";
 import { Check, X, Quote, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SiteLayout } from "@/components/site/layout";
@@ -14,7 +15,7 @@ export const Route = createFileRoute("/hoi-vien")({
       { property: "og:title", content: "Gói thành viên — Hoàng Đế Nội Kinh" },
       { property: "og:description", content: "Chọn gói hội viên phù hợp với hành trình tu dưỡng." },
     ],
-    links: [{ rel: "canonical", href: "/hoi-vien" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/hoi-vien` }],
   }),
   component: MembershipPage,
 });

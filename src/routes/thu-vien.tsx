@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { SITE_URL } from "@/lib/site-config";
 import { useEffect, useMemo, useState } from "react";
 import { Search, Lock, Sparkles } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -21,7 +22,7 @@ export const Route = createFileRoute("/thu-vien")({
       { property: "og:title", content: "Thư viện bài viết — Hoàng Đế Nội Kinh" },
       { property: "og:description", content: "Kho bài viết Đông y dưỡng sinh chọn lọc bằng tiếng Việt." },
     ],
-    links: [{ rel: "canonical", href: "/thu-vien" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/thu-vien` }],
   }),
   component: LibraryPage,
 });

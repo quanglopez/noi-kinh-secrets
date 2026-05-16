@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SITE_URL } from "@/lib/site-config";
 import { AlertTriangle } from "lucide-react";
 import { SiteLayout } from "@/components/site/layout";
 
@@ -8,7 +9,7 @@ export const Route = createFileRoute("/luu-y-suc-khoe")({
       { title: "Lưu ý y tế — Hoàng Đế Nội Kinh" },
       { name: "description", content: "Lưu ý y tế quan trọng khi tham khảo nội dung dưỡng sinh trên website." },
     ],
-    links: [{ rel: "canonical", href: "/luu-y-suc-khoe" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/luu-y-suc-khoe` }],
   }),
   component: DisclaimerPage,
 });

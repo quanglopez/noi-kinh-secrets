@@ -37,7 +37,7 @@ import coverImg from "@/assets/ebook-noi-kinh-cover.png";
 import qrPaymentImg from "@/assets/qr-payment-mb.png";
 
 const PAGE_URL =
-  "https://hoang-de-noi-kinh.lovable.app/sach/hoang-de-noi-kinh-chu-giai";
+  "https://noi-kinh-secrets.replit.app/sach/hoang-de-noi-kinh-chu-giai";
 const PRICE_NOW = 149_000;
 const PRICE_FULL = 199_000;
 const TOTAL_VALUE = 496_000;

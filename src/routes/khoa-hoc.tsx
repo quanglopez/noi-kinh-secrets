@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SITE_URL } from "@/lib/site-config";
 import { Clock, BookOpen, User, Star, Users, Check, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SiteLayout } from "@/components/site/layout";
@@ -12,10 +13,10 @@ export const Route = createFileRoute("/khoa-hoc")({
       { name: "description", content: "Khoá học trực tuyến về Hoàng Đế Nội Kinh, khí công dưỡng sinh và dược thiện cổ truyền." },
       { property: "og:title", content: "Khoá học Đông y dưỡng sinh" },
       { property: "og:description", content: "Học Đông y dưỡng sinh cùng lương y và chuyên gia Việt Nam." },
-      { property: "og:url", content: "https://hoang-de-noi-kinh.lovable.app/khoa-hoc" },
+      { property: "og:url", content: "https://noi-kinh-secrets.replit.app/khoa-hoc" },
       { property: "og:type", content: "website" },
     ],
-    links: [{ rel: "canonical", href: "/khoa-hoc" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/khoa-hoc` }],
     scripts: [
       {
         type: "application/ld+json",
