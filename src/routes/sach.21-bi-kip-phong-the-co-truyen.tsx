@@ -11,7 +11,6 @@ import {
   Flame,
   Gift,
   Mail,
-  Play,
   QrCode,
   ShieldCheck,
   Star,
@@ -60,7 +59,7 @@ export const Route = createFileRoute("/sach/21-bi-kip-phong-the-co-truyen")({
       {
         property: "og:description",
         content:
-          "Dưỡng tinh – Cường thận – Hoà hợp phu thê. 21 kỹ thuật cổ truyền + 3 bonus. Chỉ 149.000đ trong 7 ngày đầu.",
+          "Dưỡng tinh – Cường thận – Hoà hợp phu thê. 21 kỹ thuật cổ truyền + 2 bonus. Chỉ 149.000đ trong 7 ngày đầu.",
       },
       { property: "og:url", content: PAGE_URL },
       { property: "og:type", content: "product" },
@@ -75,7 +74,7 @@ export const Route = createFileRoute("/sach/21-bi-kip-phong-the-co-truyen")({
           "@type": "Product",
           name: "21 Bí Kíp Phòng The Cổ Truyền",
           description:
-            "eBook 75 trang về dưỡng sinh phòng the cổ truyền: 21 kỹ thuật + lộ trình 30 ngày + 3 bonus.",
+            "eBook 75 trang về dưỡng sinh phòng the cổ truyền: 21 kỹ thuật + lộ trình 30 ngày + 2 bonus.",
           brand: { "@type": "Brand", name: "Hoàng Đế Nội Kinh" },
           offers: {
             "@type": "Offer",
@@ -524,22 +523,15 @@ function ChaptersSection() {
 function BonusSection() {
   const bonuses = [
     {
-      icon: Play,
-      tag: "Bonus #1",
-      title: "Video hướng dẫn 8 bài Bát Đoạn Cẩm",
-      desc: "Quay trong studio, có phụ đề tiếng Việt, mỗi bài 3–5 phút. Tập theo dễ dàng tại nhà.",
-      value: 99_000,
-    },
-    {
       icon: Download,
-      tag: "Bonus #2",
+      tag: "Bonus #1",
       title: "Bảng theo dõi sinh lực 30 ngày",
       desc: "PDF in được. Mỗi ngày tự chấm 5 chỉ số: năng lượng, giấc ngủ, tinh thần, sinh lực, tâm trạng.",
       value: 99_000,
     },
     {
       icon: Clock,
-      tag: "Bonus #3",
+      tag: "Bonus #2",
       title: "7 công thức dược thiện theo mùa",
       desc: "Mở rộng phần dược thiện: 7 món cho từng mùa Xuân – Hạ – Thu – Đông phù hợp khí hậu Việt Nam.",
       value: 99_000,
@@ -554,11 +546,11 @@ function BonusSection() {
           </Badge>
           <h2 className="font-serif text-3xl md:text-5xl leading-tight">
             Khi mua hôm nay, bạn nhận thêm{" "}
-            <span className="text-imperial">3 bonus</span>
+            <span className="text-imperial">2 bonus</span>
           </h2>
           <p className="mt-3 text-muted-foreground">
             Tổng trị giá{" "}
-            <span className="line-through">{formatVnd(297_000)}</span> —{" "}
+              <span className="line-through">{formatVnd(198_000)}</span> —{" "}
             <span className="text-jade font-medium">MIỄN PHÍ</span>
           </p>
         </div>
@@ -649,7 +641,7 @@ const testimonials = [
     meta: "51 tuổi · Hà Nội",
   },
   {
-    text: "Bonus video Bát Đoạn Cẩm là phần tôi dùng hằng ngày. 10 phút mỗi sáng — cả ngày khoẻ khoắn.",
+    text: "Bài Bát Đoạn Cẩm trong sách là phần tôi tập hằng ngày. 10 phút mỗi sáng — cả ngày khoẻ khoắn.",
     name: "Anh V.A",
     meta: "36 tuổi · Cần Thơ",
   },
@@ -744,9 +736,8 @@ function OfferSection() {
   const { days, hours, minutes, seconds, ready } = useCountdown();
   const lines: { label: string; value: string }[] = [
     { label: "eBook chính · 75 trang", value: formatVnd(149_000) },
-    { label: "Bonus #1 · Video Bát Đoạn Cẩm", value: formatVnd(99_000) },
-    { label: "Bonus #2 · Bảng theo dõi 30 ngày", value: formatVnd(99_000) },
-    { label: "Bonus #3 · 7 công thức dược thiện", value: formatVnd(99_000) },
+    { label: "Bonus #1 · Bảng theo dõi 30 ngày", value: formatVnd(99_000) },
+    { label: "Bonus #2 · 7 công thức dược thiện", value: formatVnd(99_000) },
   ];
   return (
     <section

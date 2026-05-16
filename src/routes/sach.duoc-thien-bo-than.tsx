@@ -13,7 +13,6 @@ import {
   Gift,
   Leaf,
   Mail,
-  Play,
   QrCode,
   ShieldCheck,
   Star,
@@ -100,7 +99,7 @@ export const Route = createFileRoute("/sach/duoc-thien-bo-than")({
           "@context": "https://schema.org",
           "@type": "FAQPage",
           mainEntity: [
-            { "@type": "Question", name: "Tôi không biết nấu ăn, có làm theo được không?", acceptedAnswer: { "@type": "Answer", text: "Hoàn toàn được. Mỗi món có hướng dẫn từng bước, định lượng cụ thể bằng gram/muỗng/chén. 7 món khó nhất còn có video." } },
+            { "@type": "Question", name: "Tôi không biết nấu ăn, có làm theo được không?", acceptedAnswer: { "@type": "Answer", text: "Hoàn toàn được. Mỗi món có hướng dẫn từng bước, định lượng cụ thể bằng gram/muỗng/chén." } },
             { "@type": "Question", name: "Nguyên liệu thuốc Bắc có khó tìm không?", acceptedAnswer: { "@type": "Answer", text: "Tất cả vị thuốc đều có ở chợ thuốc Bắc, siêu thị lớn, hoặc Shopee/Tiki/Lazada." } },
             { "@type": "Question", name: "Có món cho người ăn chay không?", acceptedAnswer: { "@type": "Answer", text: "Có. Khoảng 20/49 món là chay hoặc có thể biến tấu chay." } },
             { "@type": "Question", name: "Phụ nữ mang thai có dùng được không?", acceptedAnswer: { "@type": "Answer", text: "Một số món có cảnh báo KHÔNG dùng khi mang thai. Sách ghi rõ ở từng món." } },
@@ -522,13 +521,6 @@ function BonusSection() {
       desc: "12 file PDF tương ứng 12 tháng. Mỗi tháng có sẵn danh sách nguyên liệu cần mua — chỉ việc cầm điện thoại đi siêu thị/chợ.",
       value: 99_000,
     },
-    {
-      icon: Play,
-      tag: "Bonus #3",
-      title: "Video Hướng Dẫn 7 Món \"Khó\"",
-      desc: "7 món có kỹ thuật nấu đặc biệt (gà tần, cháo nhung hươu, rượu bát trân…) được quay video chi tiết — xem là làm được.",
-      value: 99_000,
-    },
   ];
   return (
     <section className="py-20 md:py-28 px-6 bg-card/40 border-b border-border">
@@ -539,11 +531,11 @@ function BonusSection() {
           </Badge>
           <h2 className="font-serif text-3xl md:text-5xl leading-tight">
             Khi mua hôm nay, bạn nhận thêm{" "}
-            <span className="text-imperial">3 bonus</span>
+            <span className="text-imperial">2 bonus</span>
           </h2>
           <p className="mt-3 text-muted-foreground">
             Tổng trị giá{" "}
-            <span className="line-through">{formatVnd(297_000)}</span> —{" "}
+              <span className="line-through">{formatVnd(198_000)}</span> —{" "}
             <span className="text-jade font-medium">MIỄN PHÍ</span>
           </p>
         </div>
@@ -754,7 +746,6 @@ function OfferSection() {
     { label: "eBook 75 trang · 49 món dược thiện 4 mùa", value: formatVnd(199_000) },
     { label: "Bonus #1 · Bộ 49 Thẻ Công Thức", value: formatVnd(99_000) },
     { label: "Bonus #2 · Danh Sách Mua Sắm 12 Tháng", value: formatVnd(99_000) },
-    { label: "Bonus #3 · Video 7 Món \"Khó\"", value: formatVnd(99_000) },
   ];
   return (
     <section
@@ -896,7 +887,7 @@ function FaqSection() {
   const faqs = [
     {
       q: "Tôi không biết nấu ăn, có làm theo được không?",
-      a: "Hoàn toàn được. Mỗi món có hướng dẫn từng bước, định lượng cụ thể bằng gram/muỗng/chén — không có kiểu \"cho vừa ăn\". 7 món khó nhất còn có video.",
+      a: "Hoàn toàn được. Mỗi món có hướng dẫn từng bước, định lượng cụ thể bằng gram/muỗng/chén — không có kiểu \"cho vừa ăn\".",
     },
     {
       q: "Nguyên liệu thuốc Bắc có khó tìm không?",
