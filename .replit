@@ -34,11 +34,15 @@ outputType = "webview"
 localPort = 5000
 externalPort = 80
 
+[[ports]]
+localPort = 5001
+externalPort = 3002
+
 [deployment]
 deploymentTarget = "autoscale"
 build = ["npm", "run", "build"]
 publicDir = "dist"
-run = ["npx", "wrangler", "dev", "--config", "dist/server/wrangler.json", "--port", "5000", "--ip", "0.0.0.0"]
+run = ["node_modules/.bin/wrangler", "dev", "--config", "dist/server/wrangler.json", "--port", "5000", "--ip", "0.0.0.0"]
 
 [userenv]
 
