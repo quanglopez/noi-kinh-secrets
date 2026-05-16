@@ -11,7 +11,6 @@ import {
   Download,
   Gift,
   Mail,
-  Play,
   QrCode,
   ShieldCheck,
   Sparkles,

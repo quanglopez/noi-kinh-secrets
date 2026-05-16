@@ -11,7 +11,6 @@ import {
   Flame,
   Gift,
   Mail,
-  Play,
   QrCode,
   ShieldCheck,
   Star,

@@ -13,7 +13,6 @@ import {
   Gift,
   Leaf,
   Mail,
-  Play,
   QrCode,
   ShieldCheck,
   Star,
