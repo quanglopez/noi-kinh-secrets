@@ -352,7 +352,7 @@ function ArticlePage() {
               <Badge className="bg-gold text-ink rounded-sm">{article.category}</Badge>
               <span className="text-sm text-muted-foreground">{article.readingTime}</span>
               <span className="text-sm text-muted-foreground">·</span>
-              <span className="text-sm text-muted-foreground">{new Date(article.publishedAt).toLocaleDateString("vi-VN")}</span>
+              <span suppressHydrationWarning className="text-sm text-muted-foreground">{new Date(article.publishedAt).toLocaleDateString("vi-VN")}</span>
             </div>
             <h1 className="font-serif text-4xl md:text-6xl leading-tight mb-6">{article.title}</h1>
             <p className="text-lg text-muted-foreground leading-relaxed">{article.excerpt}</p>

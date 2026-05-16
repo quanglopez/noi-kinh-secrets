@@ -40,7 +40,7 @@ export function SiteFooter() {
       </div>
       <div className="border-t border-parchment/10">
         <div className="mx-auto max-w-7xl px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-parchment/50">
-          <p>© {new Date().getFullYear()} Hoàng Đế Nội Kinh. Bảo lưu mọi quyền.</p>
+          <p suppressHydrationWarning>© {new Date().getFullYear()} Hoàng Đế Nội Kinh. Bảo lưu mọi quyền.</p>
           <p className="font-calligraphy text-base text-gold">道法自然 · Đạo pháp tự nhiên</p>
         </div>
       </div>

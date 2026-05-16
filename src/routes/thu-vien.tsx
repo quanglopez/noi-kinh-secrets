@@ -131,7 +131,7 @@ function LibraryPage() {
                       <p className="text-sm text-muted-foreground mb-4 flex-1">{a.excerpt}</p>
                       <div className="flex items-center justify-between text-xs text-muted-foreground">
                         <span>{a.readingTime}</span>
-                        <span>{new Date(a.publishedAt).toLocaleDateString("vi-VN")}</span>
+                        <span suppressHydrationWarning>{new Date(a.publishedAt).toLocaleDateString("vi-VN")}</span>
                       </div>
                     </div>
                   </article>
