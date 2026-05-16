@@ -171,6 +171,44 @@ function HomePage() {
         </div>
       </section>
 
+      {/* VIDEO ADS */}
+      <section className="py-16 px-6 border-b border-border">
+        <div className="mx-auto max-w-5xl">
+          <div className="text-center mb-8 fade-up">
+            <p className="text-xs uppercase tracking-[0.4em] text-imperial mb-3">Xem trước</p>
+            <h2 className="font-serif text-3xl md:text-5xl mb-3">
+              Bí mật <em className="text-imperial">Nội Kinh</em> trong 60 giây
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Hé lộ ba kinh điển dưỡng sinh đã được giữ kín hàng ngàn năm — và lý do chúng vẫn
+              thay đổi cuộc đời người đọc hôm nay.
+            </p>
+          </div>
+          <div className="relative w-full overflow-hidden rounded-sm border border-border bg-ink shadow-2xl aspect-video">
+            <iframe
+              src="https://noi-kinh-secrets.replit.app/video-ads"
+              title="Video giới thiệu sách Hoàng Đế Nội Kinh"
+              loading="lazy"
+              allow="autoplay; fullscreen"
+              className="absolute inset-0 h-full w-full border-0"
+            />
+          </div>
+          <div className="mt-8 text-center">
+            <Link to="/sach">
+              <Button
+                size="lg"
+                className="bg-imperial hover:bg-imperial/90 text-primary-foreground rounded-sm px-8"
+              >
+                Khám phá toàn bộ sách <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+            <p className="text-xs text-muted-foreground mt-3">
+              Bị video hấp dẫn? Xem ngay danh mục eBook đầy đủ →
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* TINH HOA 4000 NĂM */}
       <section className="py-24 px-6">
         <div className="mx-auto max-w-7xl">
