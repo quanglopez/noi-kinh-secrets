@@ -61,7 +61,7 @@ export const Route = createFileRoute("/sach/hoang-de-noi-kinh-chu-giai")({
       {
         property: "og:description",
         content:
-          "Trí tuệ 2000 năm dành cho người hiện đại. eBook + 3 bonus, ưu đãi ra mắt 149.000đ.",
+      "Trí tuệ 2000 năm dành cho người hiện đại. eBook + 2 bonus, ưu đãi ra mắt 149.000đ.",
       },
       { property: "og:url", content: PAGE_URL },
       { property: "og:type", content: "product" },
@@ -77,7 +77,7 @@ export const Route = createFileRoute("/sach/hoang-de-noi-kinh-chu-giai")({
           "@type": "Product",
           name: "Hoàng Đế Nội Kinh Chú Giải",
           description:
-            "eBook 75 trang dịch và chú giải Hoàng Đế Nội Kinh, kèm lộ trình dưỡng sinh 30 ngày và 3 bonus.",
+            "eBook 75 trang dịch và chú giải Hoàng Đế Nội Kinh, kèm lộ trình dưỡng sinh 30 ngày và 2 bonus.",
           image: `${PAGE_URL.replace(/\/sach.*/, "")}/og-image.png`,
           brand: { "@type": "Brand", name: "Hoàng Đế Nội Kinh" },
           offers: {
@@ -508,13 +508,6 @@ function BonusSection() {
       desc: "Tháng nào nên ăn gì, ngủ mấy giờ, tập gì — chi tiết đến từng tuần.",
       value: 99_000,
     },
-    {
-      icon: Play,
-      tag: "Bonus #3",
-      title: "Video Hướng Dẫn 10 Bài Khí Công Cơ Bản",
-      desc: "Quay trong studio, có phụ đề, mỗi bài 3–5 phút. Tập tại nhà.",
-      value: 99_000,
-    },
   ];
   return (
     <section className="py-20 md:py-28 px-6 border-b border-border">
@@ -525,11 +518,11 @@ function BonusSection() {
           </Badge>
           <h2 className="font-serif text-3xl md:text-5xl leading-tight">
             Khi mua hôm nay, bạn nhận thêm{" "}
-            <span className="text-imperial">3 bonus</span>
+            <span className="text-imperial">2 bonus</span>
           </h2>
           <p className="mt-3 text-muted-foreground">
             Tổng trị giá{" "}
-            <span className="line-through">{formatVnd(297_000)}</span> —{" "}
+              <span className="line-through">{formatVnd(198_000)}</span> —{" "}
             <span className="text-jade font-medium">MIỄN PHÍ</span>
           </p>
         </div>
@@ -712,7 +705,6 @@ function OfferSection() {
     { label: "eBook chính · 75 trang", value: formatVnd(199_000) },
     { label: "Bonus #1 · Bảng 30 huyệt đạo", value: formatVnd(99_000) },
     { label: "Bonus #2 · Lịch dưỡng sinh 12 tháng", value: formatVnd(99_000) },
-    { label: "Bonus #3 · Video 10 bài khí công", value: formatVnd(99_000) },
   ];
   return (
     <section
