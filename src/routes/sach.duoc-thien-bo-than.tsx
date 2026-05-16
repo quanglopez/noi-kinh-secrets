@@ -1175,7 +1175,7 @@ const BANK_INFO = {
   account: "8873333333",
   holder: "CAO NHAT QUANG",
   content: "DT [Email của bạn]",
-  amount: 149_000,
+  amount: PRICE_NOW,
 };
 
 function BankTransferQr() {
